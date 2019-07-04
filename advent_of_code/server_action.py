@@ -9,15 +9,23 @@ submit_url = "https://adventofcode.com/{}/day/{}/submit"
 
 
 def download_input(year, day, session):
-    if not check_if_downloaded(year, day, session):
-        inputUrl = input_url.format(year, day)
-        input = requests.get(
-            inputUrl, cookies={"session": get_session_value(session)}
-        )
-        save_to_location(year, day, session, input.text)
+    """
+        Download file from a advent of code server
+    """
+    session_value = get_session_value(session)
+    if session_value is not None:
+        if not check_if_downloaded(year, day, session):
+            inputUrl = input_url.format(year, day)
+            input = requests.get(inputUrl, cookies={"session": session_value})
+            save_to_location(year, day, session, input.text)
+    else:
+        raise Exception("{} key is not present in config file".format(session))
 
 
 def check_if_downloaded(year, day, session):
+    """
+    Check if really a input is downloaded or not
+    """
     cache_location = appdirs.user_cache_dir()
     cache_file = os.path.join(
         cache_location, str(session), str(year), str(day), "input.txt"
@@ -27,6 +35,9 @@ def check_if_downloaded(year, day, session):
 
 
 def save_to_location(year, day, session, input):
+    """
+    Save a input to its location
+    """
     cache_location = appdirs.user_cache_dir()
     cache_folder = os.path.join(
         cache_location, "advent_of_code", str(session), str(year), str(day)
