@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "advent-of-code"
+version = "0.1.0"
+description = ""
+authors = ["Saurav Sharma <appdroiddeveloper@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+click = "7.0"
+appdirs="1.4.3"
+requests="2.22.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "5.0.0"
+black = "19.3b0"
+flake8="3.7.7"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry.scripts]
+advent-of-code = "advent_of_code.cli:main"

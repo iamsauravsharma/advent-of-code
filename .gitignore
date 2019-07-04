@@ -1,0 +1,15 @@
+#Python Cache
+__pycache__/
+.pytest_cache/
+
+#Packaging
+*.egg-info/
+pip-wheel-metadata/
+
+#IDE file
+.vscode
+.idea
+*.iml
+
+#UNIX file
+.directory
