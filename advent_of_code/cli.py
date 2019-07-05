@@ -36,9 +36,9 @@ def remove(name):
 
 
 @main.command(help="download solution form advent-of-code server")
-@click.option("--year", "-y", multiple=True)
-@click.option("--day", "-d", multiple=True)
-@click.option("--session", "-s", multiple=True)
+@click.option("--year", "-y", multiple=True, required=True)
+@click.option("--day", "-d", multiple=True, required=True)
+@click.option("--session", "-s", multiple=True, required=True)
 def download(year, day, session):
     for y in year:
         for d in day:
