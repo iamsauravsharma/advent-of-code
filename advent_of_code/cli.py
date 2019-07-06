@@ -1,6 +1,7 @@
 import click
 from .config_file import add_to_json, delete_from_json, list_from_json
 from .server_action import download_input
+from .cache_file import delete_input
 
 
 @click.group()
@@ -29,9 +30,9 @@ def list():
     list_from_json()
 
 
-@config.command(help="remove session from config")
+@config.command("remove", help="remove session from config")
 @click.argument("name")
-def remove(name):
+def remove_config_data(name):
     delete_from_json(name)
 
 
@@ -44,3 +45,14 @@ def download(year, day, session):
         for d in day:
             for s in session:
                 download_input(y, d, s)
+
+
+@main.command("remove", help="delete a input file from cache folder")
+@click.option("--year", "-y", multiple=True, required=True)
+@click.option("--day", "-d", multiple=True, required=True)
+@click.option("--session", "-s", multiple=True, required=True)
+def remove_cache(year, day, session):
+    for y in year:
+        for d in day:
+            for s in session:
+                delete_input(y, d, s)
