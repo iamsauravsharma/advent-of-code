@@ -1,7 +1,13 @@
 import click
-from .config_file import add_to_json, delete_from_json, list_from_json
+from .config_file import (
+    add_to_json,
+    delete_from_json,
+    list_from_json,
+    get_all_session,
+)
 from .server_action import download_input
 from .cache_file import delete_input
+from .utils import get_current_year, get_day
 
 
 @click.group()
@@ -25,8 +31,8 @@ def add(name, session_value):
     add_to_json(**data_list)
 
 
-@config.command(help="list out all session present in config")
-def list():
+@config.command("list", help="list out all session present in config")
+def list_config_session():
     list_from_json()
 
 
@@ -37,10 +43,31 @@ def remove_config_data(name):
 
 
 @main.command(help="download solution form advent-of-code server")
-@click.option("--year", "-y", multiple=True, required=True)
-@click.option("--day", "-d", multiple=True, required=True)
-@click.option("--session", "-s", multiple=True, required=True)
+@click.option(
+    "--year",
+    "-y",
+    multiple=True,
+    help="Pass input download year [default: latest year]",
+)
+@click.option(
+    "--day",
+    "-d",
+    multiple=True,
+    help="Pass input download day [default: latest day or day 1 of old year]",
+)
+@click.option(
+    "--session",
+    "-s",
+    multiple=True,
+    help="Pass session name or use default as session value if present",
+)
 def download(year, day, session):
+    if year == ():
+        year = [get_current_year()]
+    if day == ():
+        day = [get_day()]
+    if session == ():
+        session = ["default"]
     for y in year:
         for d in day:
             for s in session:
@@ -48,10 +75,32 @@ def download(year, day, session):
 
 
 @main.command("remove", help="delete a input file from cache folder")
-@click.option("--year", "-y", multiple=True, required=True)
-@click.option("--day", "-d", multiple=True, required=True)
-@click.option("--session", "-s", multiple=True, required=True)
+@click.option(
+    "--year",
+    "-y",
+    multiple=True,
+    help="Year from which input is to be delete default all",
+)
+@click.option(
+    "--day",
+    "-d",
+    multiple=True,
+    help="Day from which input file is to be delete default all day",
+)
+@click.option(
+    "--session",
+    "-s",
+    multiple=True,
+    help="Session from which input file is to be deleted default all session",
+)
 def remove_cache(year, day, session):
+    if year == ():
+        year = list(range(2015, get_current_year() + 1))
+    if day == ():
+        day = list(range(1, 26))
+    if session == ():
+        session = get_all_session()
+    print(year, day, session)
     for y in year:
         for d in day:
             for s in session:

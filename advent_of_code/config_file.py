@@ -40,7 +40,9 @@ class Data:
         try:
             self.session_list.pop(session)
         except KeyError:
-            print("Value with name {} not found over config".format(session))
+            raise Exception(
+                "Value with name {} not found over config".format(session)
+            )
 
 
 def __read_json_file(config_file):
@@ -109,4 +111,21 @@ def get_session_value(session_name):
     data = __read_json_file(config_file)
     json_dict = json.loads(data.to_json())
     json_data = json_dict.get("session_list")
-    return json_data.get(session_name)
+    session_value = json_data.get(session_name)
+    if session_value is not None:
+        return session_value
+    else:
+        raise Exception(
+            "{} key is not present in config file".format(session_name)
+        )
+
+
+def get_all_session():
+    """
+    Return all session name
+    """
+    config_file = __config_file_data()
+    data = __read_json_file(config_file)
+    json_dict = json.loads(data.to_json())
+    json_data = json_dict.get("session_list")
+    return json_data.keys()
