@@ -2,6 +2,7 @@ import appdirs
 import os
 import shutil
 from pathlib import Path
+from .server_action import download_input
 
 
 def check_if_downloaded(year, day, session):
@@ -40,3 +41,17 @@ def delete_input(year, day, session):
     )
     if Path(cache_folder).exists():
         shutil.rmtree(cache_folder)
+
+
+def cache_file_data(year, day, session):
+    """
+    Return cache file data from cache
+    """
+    download_input(year, day, session)
+    cache_location = appdirs.user_cache_dir()
+    cache_file = os.path.join(
+        cache_location, str(session), str(year), str(day), "input.txt"
+    )
+    with open(cache_file) as f:
+        input_data = f.read()
+    return input_data
