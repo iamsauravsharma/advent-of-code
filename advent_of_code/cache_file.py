@@ -17,7 +17,7 @@ def check_if_downloaded(year, day, session):
     return cache_file.exists()
 
 
-def save_to_location(year, day, session, input):
+def save_input_to_location(year, day, session, input):
     """
     Save a input to its location
     """

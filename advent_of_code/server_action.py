@@ -1,6 +1,6 @@
 import requests
 from .config_file import get_session_value
-from .cache_file import check_if_downloaded, save_to_location
+from .cache_file import check_if_downloaded, save_input_to_location
 
 input_url = "https://adventofcode.com/{}/day/{}/input"
 submit_url = "https://adventofcode.com/{}/day/{}/answer"
@@ -14,7 +14,7 @@ def download_input(year, day, session):
     if not check_if_downloaded(year, day, session):
         inputUrl = input_url.format(year, day)
         input = requests.get(inputUrl, cookies={"session": session_value})
-        save_to_location(year, day, session, input.text)
+        save_input_to_location(year, day, session, input.text)
 
 
 def submit_output(year, day, part, session, output):
