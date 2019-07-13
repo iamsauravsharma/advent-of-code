@@ -124,4 +124,4 @@ def get_all_session():
     data = __read_json_file(config_file)
     json_dict = json.loads(data.to_json())
     json_data = json_dict.get("session_list")
-    return json_data.keys()
+    return list[json_data.keys()]

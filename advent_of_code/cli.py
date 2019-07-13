@@ -54,7 +54,7 @@ def remove_config_data(name):
     "--session",
     "-s",
     multiple=True,
-    help="Pass session name or use default as session value if present",
+    help="Pass session name or use all session as default",
 )
 def download(year, day, session):
     if year == ():
@@ -62,7 +62,7 @@ def download(year, day, session):
     if day == ():
         day = [get_day()]
     if session == ():
-        session = ["default"]
+        session = get_all_session()
     for y in year:
         for d in day:
             for s in session:
