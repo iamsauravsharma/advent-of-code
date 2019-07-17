@@ -2,6 +2,12 @@ import click
 
 
 def adventrunner(func):
+    """
+    Advent of code runner decorator which decorate out a function for a simple CLI
+    tool creation. Function which is decorated using a advent of code runner should
+    return out a Initializer class so it can create out a CLI
+    """
+
     def create_command():
         initializer_defined = func()
 
