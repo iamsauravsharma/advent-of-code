@@ -23,6 +23,13 @@ class Initializer:
         """
         self.function_list.get(function_alias)()
 
+    def run_all(self):
+        """
+        Run all functions
+        """
+        for value in self.function_list.values():
+            value()
+
     def list_functions(self):
         """
         List out all of the function and its location

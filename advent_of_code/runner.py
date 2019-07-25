@@ -23,6 +23,10 @@ def adventrunner(func):
         def run(name):
             initializer_defined.run(name)
 
+        @main.comman(help="run all function defined in a package")
+        def all():
+            initializer_defined.run_all()
+
         @main.command("list", help="list out all of the available function")
         def list_functions():
             initializer_defined.list_functions()
