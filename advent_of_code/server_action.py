@@ -24,4 +24,19 @@ def submit_output(year, day, part, session, output):
     session_value = get_session_value(session)
     submitUrl = submit_url.format(year, day)
     data = {"level": part, "answer": output}
-    requests.post(submitUrl, data, cookies={"session": session_value})
+    response = requests.post(submitUrl, data, cookies={"session": session_value})
+    if response.status_code != 200:
+        raise Exception("Error Submiting a Solution Online")
+    text_data = response.text
+    if "too high" in text_data:
+        raise Exception("Your Answer is too high")
+    elif "too low" in text_data:
+        raise Exception("Your Answer is too low")
+    elif "That's not" in text_data:
+        raise Exception("That not the right answer")
+    elif "You don't seem" in text_data:
+        raise Exception("You don't seem to be solving right level")
+    elif "You gave an answer" in text_data:
+        raise Exception("You have to wait for 1 min before submitting next solution")
+    elif "That's the right answer":
+        print("Congratulate you have solved question answer sucessfully")
