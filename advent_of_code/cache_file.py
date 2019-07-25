@@ -44,9 +44,39 @@ def cache_file_data(year, day, session):
     return input_data
 
 
-def join_path(year, day, session, input=False):
+def save_submitted_answer(year, day, part, session, output, message):
+    """
+    Save submitted input to  file
+    """
+    submitted_file = join_path(year, day, session, submission=True)
+    with open(submitted_file, "a") as f:
+        f.write("{}!{}:{}\n".format(part, output, message))
+
+
+def check_if_answer_is_present(year, day, part, session, output):
+    """
+    Check is answer is already submitted
+    """
+    submission_file = join_path(year, day, session, submission=True)
+    with open(submission_file, "r") as f:
+        lines = f.read()
+        for line in lines:
+            seprate_part = line.split("!", 1)
+            if seprate_part[0] == part:
+                seprate_output = seprate_part[1].split(":", 1)
+                if seprate_output == output:
+                    raise Exception(
+                        "You have already submitted this solution you got {}".format(
+                            seprate_output[1]
+                        )
+                    )
+
+
+def join_path(year, day, session, input=False, submission=False):
     cache_location = appdirs.user_cache_dir()
     cache_file = os.path.join(cache_location, str(session), str(year), str(day))
     if input:
         cache_file = os.path.join(cache_file, "input.txt")
+    if submission:
+        cache_file = os.path.join(cache_file, "submission.txt")
     return cache_file

@@ -1,6 +1,11 @@
 import requests
 from .config_file import get_session_value
-from .cache_file import check_if_downloaded, save_input_to_location
+from .cache_file import (
+    check_if_downloaded,
+    save_input_to_location,
+    check_if_answer_is_present,
+    save_submitted_answer,
+)
 
 input_url = "https://adventofcode.com/{}/day/{}/input"
 submit_url = "https://adventofcode.com/{}/day/{}/answer"
@@ -23,20 +28,30 @@ def submit_output(year, day, part, session, output):
     """
     session_value = get_session_value(session)
     submitUrl = submit_url.format(year, day)
+    check_if_answer_is_present(year, day, part, session, output)
     data = {"level": part, "answer": output}
     response = requests.post(submitUrl, data, cookies={"session": session_value})
     if response.status_code != 200:
         raise Exception("Error Submiting a Solution Online")
     text_data = response.text
     if "too high" in text_data:
-        raise Exception("Your Answer is too high")
+        message = "Your answer is too high"
+        save_submitted_answer(year, day, part, session, output, message)
+        raise Exception(message)
     elif "too low" in text_data:
-        raise Exception("Your Answer is too low")
+        message = "Your answer is too low"
+        save_submitted_answer(year, day, part, session, output, message)
+        raise Exception(message)
     elif "That's not" in text_data:
-        raise Exception("That not the right answer")
+        message = "That's not the right answer"
+        save_submitted_answer(year, day, part, session, output, message)
+        raise Exception(message)
     elif "You don't seem" in text_data:
         raise Exception("You don't seem to be solving right level")
     elif "You gave an answer" in text_data:
         raise Exception("You have to wait for 1 min before submitting next solution")
     elif "That's the right answer":
-        print("Congratulate you have solved question answer sucessfully")
+        save_submitted_answer(
+            year, day, part, session, output, "You have solved question part correctly"
+        )
+        print("Congratulation, you have solved question answer successfully")
