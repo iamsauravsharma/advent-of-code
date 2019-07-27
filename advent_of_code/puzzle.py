@@ -22,10 +22,15 @@ class _Puzzle:
     def __call__(self):
         input = cache_file_data(self.year, self.day, self.session)
         answer = self.function(input)
+        session_with_message = dict()
         if answer is not None:
             for session_list in self.session:
                 if self.operation_type == "submit":
-                    submit_output(self.year, self.day, self.part, session_list, answer)
+                    message = submit_output(
+                        self.year, self.day, self.part, session_list, answer
+                    )
+                    if message is not None:
+                        session_with_message[session_list] = message
                 elif self.operation_type == "solve":
                     print(
                         "Session ID: {} Part {}: {}".format(
