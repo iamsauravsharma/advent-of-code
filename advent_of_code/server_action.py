@@ -5,6 +5,8 @@ from .cache_file import (
     save_input_to_location,
     check_if_answer_is_present,
     save_submitted_answer,
+    save_last_submission_time,
+    check_last_submission_time,
 )
 
 input_url = "https://adventofcode.com/{}/day/{}/input"
@@ -29,7 +31,9 @@ def submit_output(year, day, part, session, output):
     session_value = get_session_value(session)
     submitUrl = submit_url.format(year, day)
     check_if_answer_is_present(year, day, part, session, output)
+    check_last_submission_time(year, day, session)
     data = {"level": part, "answer": output}
+    save_last_submission_time(year, day, session)
     response = requests.post(submitUrl, data, cookies={"session": session_value})
     if response.status_code != 200:
         raise Exception(

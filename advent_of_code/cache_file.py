@@ -2,6 +2,7 @@ import appdirs
 import os
 from pathlib import Path
 from .server_action import download_input
+import time
 
 
 def check_if_downloaded(year, day, session):
@@ -72,11 +73,36 @@ def check_if_answer_is_present(year, day, part, session, output):
                     )
 
 
-def join_path(year, day, session, input=False, submission=False):
+def save_last_submission_time(year, day, session):
+    """
+    Save a time where a request is performed
+    """
+    last_time_file = join_path(year, day, session, last_file=True)
+    with open(last_time_file, "w") as f:
+        f.write(str(time.time()))
+
+
+def check_last_submission_time(year, day, session):
+    """
+    Check last submission date raise error if time is less than 60 second
+    """
+    last_time_file = join_path(year, day, session, last_file=True)
+    with open(last_time_file, "r") as f:
+        last_time = float(f.read())
+        current_time = time.time()
+        if current_time - last_time < 60.0:
+            raise Exception(
+                "You have last submitted within 60 seconds for this solution"
+            )
+
+
+def join_path(year, day, session, input=False, submission=False, last_file=False):
     cache_location = appdirs.user_cache_dir()
     cache_file = os.path.join(cache_location, str(session), str(year), str(day))
     if input:
         cache_file = os.path.join(cache_file, "input.txt")
     if submission:
         cache_file = os.path.join(cache_file, "submission.txt")
+    if last_file:
+        cache_file = os.path.join(cache_file, "time.txt")
     return cache_file
