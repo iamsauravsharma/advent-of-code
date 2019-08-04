@@ -1,7 +1,6 @@
 import appdirs
 import os
 from pathlib import Path
-from .server_action import download_input
 import time
 
 
@@ -38,6 +37,8 @@ def cache_file_data(year, day, session):
     """
     Return cache file data from cache
     """
+    from .server_action import download_input
+
     download_input(year, day, session)
     cache_file = join_path(year, day, session, input=True)
     with open(cache_file) as f:
