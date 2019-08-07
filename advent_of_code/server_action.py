@@ -30,32 +30,45 @@ def submit_output(year, day, part, session, output):
     """
     session_value = get_session_value(session)
     submitUrl = submit_url.format(year, day)
-    check_if_answer_is_present(year, day, part, session, output)
-    check_last_submission_time(year, day, session)
-    data = {"level": part, "answer": output}
-    save_last_submission_time(year, day, session)
-    response = requests.post(submitUrl, data, cookies={"session": session_value})
-    if response.status_code != 200:
-        raise Exception(
-            "Error Submiting a Solution Online doesn't got response code 200"
-        )
-    text_data = response.text
-    if "too high" in text_data:
-        message = "Your answer is too high"
-        save_submitted_answer(year, day, part, session, output, message)
-    elif "too low" in text_data:
-        message = "Your answer is too low"
-        save_submitted_answer(year, day, part, session, output, message)
-    elif "That's not" in text_data:
-        message = "That's not the right answer"
-        save_submitted_answer(year, day, part, session, output, message)
-    elif "You don't seem" in text_data:
-        message = "You don't seem to be solving right level"
-    elif "You gave an answer" in text_data:
-        message = "You have to wait for 1 min before submitting next solution"
-    elif "That's the right answer":
-        message = "Congratulation, you have solved question answer successfully"
-        save_submitted_answer(
-            year, day, part, session, output, "You have solved question part correctly"
-        )
-    return message
+    submitted_message = check_if_answer_is_present(year, day, part, session, output)
+    if submitted_message is None:
+        last_submitted_message = check_last_submission_time(year, day, session)
+        if last_submitted_message is None:
+            data = {"level": part, "answer": output}
+            save_last_submission_time(year, day, session)
+            response = requests.post(
+                submitUrl, data, cookies={"session": session_value}
+            )
+            if response.status_code != 200:
+                raise Exception(
+                    "Error Submiting a Solution Online doesn't got response code 200"
+                )
+            text_data = response.text
+            if "too high" in text_data:
+                message = "Your answer is too high"
+                save_submitted_answer(year, day, part, session, output, message)
+            elif "too low" in text_data:
+                message = "Your answer is too low"
+                save_submitted_answer(year, day, part, session, output, message)
+            elif "That's not" in text_data:
+                message = "That's not the right answer"
+                save_submitted_answer(year, day, part, session, output, message)
+            elif "You don't seem" in text_data:
+                message = "You don't seem to be solving right level"
+            elif "You gave an answer" in text_data:
+                message = "You have to wait for 1 min before submitting next solution"
+            elif "That's the right answer":
+                message = "Congratulation, you have solved question answer successfully"
+                save_submitted_answer(
+                    year,
+                    day,
+                    part,
+                    session,
+                    output,
+                    "You have solved question part correctly",
+                )
+            return message
+        else:
+            return last_submitted_message
+    else:
+        return submitted_message

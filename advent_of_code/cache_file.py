@@ -67,11 +67,7 @@ def check_if_answer_is_present(year, day, part, session, output):
             if seprate_part[0] == part:
                 seprate_output = seprate_part[1].split(":", 1)
                 if seprate_output == output:
-                    raise Exception(
-                        "You have already submitted this solution you got {}".format(
-                            seprate_output[1]
-                        )
-                    )
+                    return seprate_output[1]
 
 
 def save_last_submission_time(year, day, session):
@@ -92,9 +88,7 @@ def check_last_submission_time(year, day, session):
         last_time = float(f.read())
         current_time = time.time()
         if current_time - last_time < 60.0:
-            raise Exception(
-                "You have last submitted within 60 seconds for this solution"
-            )
+            return "You have to wait for 1 min before submitting next solution"
 
 
 def join_path(year, day, session, input=False, submission=False, last_file=False):
