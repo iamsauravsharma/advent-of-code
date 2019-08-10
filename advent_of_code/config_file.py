@@ -10,6 +10,9 @@ class Data:
     """
 
     def __init__(self, **kwargs):
+        """
+        Initialize Data class
+        """
         self.session_list = kwargs
 
     def to_json(self):
@@ -21,7 +24,7 @@ class Data:
     @classmethod
     def from_json(cls, json_str):
         """
-        Create a Data type from json_str
+        Create Data type from JSON
         """
         json_dict = json.loads(json_str)
         json_data = json_dict.get("session_list")

@@ -3,7 +3,7 @@ import inspect
 
 class Initializer:
     """
-    Initialize Class which is used to initialize a advent of code function runner.
+    Initialize class which is used to initialize an advent of code function runner.
     Initialize create out a basic class which is used for adding of different
     function of advent of code solution so all of functions can be easily run with
     one simple CLI tool

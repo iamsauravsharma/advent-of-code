@@ -37,7 +37,7 @@ def remove_config_data(name):
     delete_from_json(name)
 
 
-@main.command(help="download solution form advent-of-code server")
+@main.command(help="download solution from advent-of-code server")
 @click.option(
     "--year",
     "-y",

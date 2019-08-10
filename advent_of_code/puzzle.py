@@ -65,11 +65,11 @@ def submit(year, day, part, session=None):
     Puzzle decorator used to submit a solution and provide a input data
     """
 
-    def _cache(function):
+    def _action(function):
         operation_type = "submit"
         return _Puzzle(function, operation_type, year, day, part, session)
 
-    return _cache
+    return _action
 
 
 def solve(year, day, part, session=None):
@@ -77,8 +77,8 @@ def solve(year, day, part, session=None):
     Puzzle decorator used to solve a solution instead of submiting a submiting it
     """
 
-    def _cache(function):
+    def _action(function):
         operation_type = "solve"
         return _Puzzle(function, operation_type, year, day, part, session)
 
-    return _cache
+    return _action
