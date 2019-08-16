@@ -2,6 +2,9 @@
 __pycache__/
 .pytest_cache/
 
+#Python Virtual environment
+.venv/
+
 #Packaging
 *.egg-info/
 pip-wheel-metadata/
