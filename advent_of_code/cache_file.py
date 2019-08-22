@@ -6,7 +6,7 @@ import time
 
 def check_if_downloaded(year, day, session):
     """
-    Check if an input is downloaded and cached or not
+    Check if an input is downloaded and cached or not in cache location
     """
     cache_file = __join_path(year, day, session, input_file=True)
     cache_file = Path(cache_file)
@@ -15,7 +15,7 @@ def check_if_downloaded(year, day, session):
 
 def save_input_to_location(year, day, session, input):
     """
-    Save a input to its location
+    Save a input to its location for future use
     """
     cache_folder = __join_path(year, day, session)
     Path(cache_folder).mkdir(parents=True, exist_ok=True)
@@ -35,7 +35,7 @@ def delete_input(year, day, session):
 
 def cache_file_data(year, day, session):
     """
-    Return cache file data from cache
+    Return cache file input data from cache
     """
     from .server_action import download_input
 

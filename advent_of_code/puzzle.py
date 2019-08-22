@@ -62,7 +62,8 @@ class _Puzzle:
 
 def submit(year, day, part, session=None):
     """
-    Puzzle decorator used to submit a solution and provide a input data
+    Puzzle decorator used to submit a solution to advent_of_code server and
+    provide result.
     """
 
     def _action(function):
@@ -74,7 +75,8 @@ def submit(year, day, part, session=None):
 
 def solve(year, day, part, session=None):
     """
-    Puzzle decorator used to solve a solution instead of submiting a submiting it
+    Puzzle decorator used to solve a solution instead of submiting a submiting
+    it to server its print output value.
     """
 
     def _action(function):

@@ -32,13 +32,13 @@ class Data:
 
     def add_session(self, **kwargs):
         """
-        Add new session or update session in a config file Data type
+        Add new session or update session in a config file Data type.
         """
         self.session_list.update(kwargs)
 
     def delete_session(self, session):
         """
-        Delete Session from config file
+        Delete Session from config files
         """
         try:
             self.session_list.pop(session)
