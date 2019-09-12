@@ -81,14 +81,16 @@ def submit(year, day, part, session=None, input_file=None):
     return _action
 
 
-def solve(year, day, part, session=None):
+def solve(year, day, part, session=None, input_file=None):
     """
     Puzzle decorator used to solve a solution instead of submiting it to server its
-    print output value.
+    print output value. Puzzle can also be solved by using custom file location with
+    help of input_file parameter while using input_file year, day, part are required
+    even if they are not used for only reference purpose of printing output.
     """
 
     def _action(function):
         operation_type = "solve"
-        return _Puzzle(function, operation_type, year, day, part, session)
+        return _Puzzle(function, operation_type, year, day, part, session, input_file)
 
     return _action
