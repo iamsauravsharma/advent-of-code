@@ -8,7 +8,9 @@ class _Puzzle:
     Puzzle class for handling out a puzzle decorator
     """
 
-    def __init__(self, function, operation_type, year, day, part, session=None):
+    def __init__(
+        self, function, operation_type, year, day, part, session=None, input_file=None
+    ):
         self.function = function
         self.year = year
         self.day = day
@@ -18,9 +20,14 @@ class _Puzzle:
         else:
             self.session = session
         self.operation_type = operation_type
+        self.input_file = input_file
 
     def __call__(self):
-        input = cache_file_data(self.year, self.day, self.session)
+        if self.input_file is None:
+            input = cache_file_data(self.year, self.day, self.session)
+        else:
+            with open(self.input_file) as f:
+                input = f.read()
         answer = self.function(input)
         if answer is not None:
             for session_list in self.session:
@@ -60,23 +67,24 @@ class _Puzzle:
                     )
 
 
-def submit(year, day, part, session=None):
+def submit(year, day, part, session=None, input_file=None):
     """
     Puzzle decorator used to submit a solution to advent_of_code server and
-    provide result.
+    provide result. If input_file is not present then it tries to download
+    file and cache it for submiting solution else it will use input_file path
     """
 
     def _action(function):
         operation_type = "submit"
-        return _Puzzle(function, operation_type, year, day, part, session)
+        return _Puzzle(function, operation_type, year, day, part, session, input_file)
 
     return _action
 
 
 def solve(year, day, part, session=None):
     """
-    Puzzle decorator used to solve a solution instead of submiting a submiting
-    it to server its print output value.
+    Puzzle decorator used to solve a solution instead of submiting it to server its
+    print output value.
     """
 
     def _action(function):
