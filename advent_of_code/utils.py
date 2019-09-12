@@ -7,6 +7,7 @@ eastern = gettz("America/New_York")
 def get_current_year():
     """
     Get latest year of advent of code return old year if month is not December
+    otherwise return current year
     """
     date_time = datetime.datetime.now(tz=eastern)
     if date_time.month < 12:

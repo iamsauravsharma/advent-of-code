@@ -15,7 +15,7 @@ submit_url = "https://adventofcode.com/{}/day/{}/answer"
 
 def download_input(year, day, session):
     """
-    Download file from a advent of code server and save it for future reference
+    Download file from a advent of code server and save it for future reference and use
     """
     session_value = get_session_value(session)
     if not check_if_downloaded(year, day, session):
@@ -26,7 +26,7 @@ def download_input(year, day, session):
 
 def submit_output(year, day, part, session, output):
     """
-    Submit solution to a advent of code server
+    Submit solution output to a advent of code server
     """
     session_value = get_session_value(session)
     submitUrl = submit_url.format(year, day)

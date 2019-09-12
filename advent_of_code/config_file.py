@@ -6,7 +6,7 @@ from pathlib import Path
 
 class Data:
     """
-    Class to store data about a config file
+    Class to store data about a config file of advent-of-code
     """
 
     def __init__(self, **kwargs):

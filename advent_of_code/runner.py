@@ -5,7 +5,8 @@ def adventrunner(func):
     """
     Advent of code runner decorator which decorate out a function for a simple CLI
     tool creation. Function which is decorated using a advent of code runner should
-    return out a Initializer class so it can create out a CLI
+    return out a Initializer class so it can create out a CLI from Initializer class
+    object
     """
 
     def create_command():
@@ -18,12 +19,12 @@ def adventrunner(func):
             """
             pass
 
-        @main.command(help="run a certain function defined inside a run function")
+        @main.command(help="run a certain function by name present in Initializer")
         @click.argument("name")
         def run(name):
             initializer_defined.run(name)
 
-        @main.command(help="run all function defined in a package")
+        @main.command(help="run all function defined in a Initializer class")
         def all():
             initializer_defined.run_all()
 
