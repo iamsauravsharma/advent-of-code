@@ -71,7 +71,8 @@ def submit(year, day, part, session=None, input_file=None):
     """
     Puzzle decorator used to submit a solution to advent_of_code server and
     provide result. If input_file is not present then it tries to download
-    file and cache it for submiting solution else it will use input_file path
+    file and cache it for submiting solution else it require to be provided
+    with input_file path which input it can use out
     """
 
     def _action(function):
@@ -83,10 +84,12 @@ def submit(year, day, part, session=None, input_file=None):
 
 def solve(year, day, part, session=None, input_file=None):
     """
-    Puzzle decorator used to solve a solution instead of submiting it to server its
-    print output value. Puzzle can also be solved by using custom file location with
-    help of input_file parameter while using input_file year, day, part are required
-    even if they are not used for only reference purpose of printing output.
+    Puzzle decorator used to only solve a solution & print output value. It doesn't
+    submit output to advent of code server to validate out whether an answer is correct
+    or not. By default it downloads out input file from advent-of-code server. Puzzle
+    can also be solved by using custom file location with help of input_file parameter
+    while using input_file year, day, part are required even if they are not used for
+    only reference purpose of printing output.
     """
 
     def _action(function):

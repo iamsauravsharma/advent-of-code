@@ -13,7 +13,7 @@ def main():
     pass
 
 
-@main.group(help="Perform action related to config file")
+@main.group(help="perform action related to config file")
 def config():
     pass
 
