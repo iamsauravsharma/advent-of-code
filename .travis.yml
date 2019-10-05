@@ -21,8 +21,10 @@ before_script:
   - pytest --version
   - flake8 --version
   - black --version
+  - isort --version
 
 script: 
   - pytest -v
   - flake8 --count
   - black ./ --check
+  - isort --recursive --check-only .

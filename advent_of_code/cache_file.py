@@ -1,7 +1,8 @@
-import appdirs
 import os
-from pathlib import Path
 import time
+from pathlib import Path
+
+import appdirs
 
 
 def check_if_downloaded(year, day, session):
