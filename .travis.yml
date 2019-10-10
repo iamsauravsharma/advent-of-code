@@ -14,7 +14,7 @@ before_install:
   - poetry --version
 
 install:
-  - poetry install -v
+  - poetry update -v
   - poetry show -v
 
 before_script:
@@ -28,3 +28,6 @@ script:
   - flake8 --count
   - black ./ --check
   - isort --recursive --check-only .
+
+notifications:
+  email: false
