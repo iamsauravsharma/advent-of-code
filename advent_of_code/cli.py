@@ -1,3 +1,4 @@
+"""Main CLI for advent-of-code tool"""
 import click
 
 from .cache_file import delete_input

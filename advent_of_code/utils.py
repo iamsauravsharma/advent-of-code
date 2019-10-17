@@ -1,3 +1,6 @@
+"""
+utility module used to find current year and day for advent of code solution download
+"""
 import datetime
 
 from dateutil.tz import gettz

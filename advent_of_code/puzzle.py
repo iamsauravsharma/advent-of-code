@@ -1,3 +1,4 @@
+"""module used for defining puzzle decorator for submiting or solving problem"""
 from .cache_file import cache_file_data
 from .config_file import get_all_session
 from .server_action import submit_output
@@ -69,10 +70,10 @@ class _Puzzle:
 
 def submit(year, day, part, session=None, input_file=None):
     """
-    Puzzle decorator used to submit a solution to advent_of_code server and
-    provide result. If input_file is not present then it tries to download
-    file and cache it for submiting solution else it require to be provided
-    with input_file path which input it can use out
+    Puzzle decorator used to submit a solution to advent_of_code server and provide
+    result. If input_file is not present then it tries to download file and cache it
+    for submiting solution else it require to be provided with input_file path which
+    input it can use out
     """
 
     def _action(function):

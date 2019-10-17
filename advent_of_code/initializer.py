@@ -1,3 +1,7 @@
+"""
+initializer module which defines Initializer class which initialize advent of code
+function runner
+"""
 import inspect
 
 
