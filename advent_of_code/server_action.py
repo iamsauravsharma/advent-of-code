@@ -21,8 +21,8 @@ def download_input(year, day, session):
     """
     session_value = get_session_value(session)
     if not check_if_downloaded(year, day, session):
-        inputUrl = INPUT_URL.format(year, day)
-        input = requests.get(inputUrl, cookies={"session": session_value})
+        input_url = INPUT_URL.format(year, day)
+        input = requests.get(input_url, cookies={"session": session_value})
         save_input_to_location(year, day, session, input.text)
 
 
@@ -31,7 +31,7 @@ def submit_output(year, day, part, session, output):
     Submit solution output to a advent of code server
     """
     session_value = get_session_value(session)
-    submitUrl = SUBMIT_URL.format(year, day)
+    submit_url = SUBMIT_URL.format(year, day)
     submitted_message = check_if_answer_is_present(year, day, part, session, output)
     if submitted_message is None:
         last_submitted_message = check_last_submission_time(year, day, session)
@@ -39,7 +39,7 @@ def submit_output(year, day, part, session, output):
             data = {"level": part, "answer": output}
             save_last_submission_time(year, day, session)
             response = requests.post(
-                submitUrl, data, cookies={"session": session_value}
+                submit_url, data, cookies={"session": session_value}
             )
             if response.status_code != 200:
                 message = (

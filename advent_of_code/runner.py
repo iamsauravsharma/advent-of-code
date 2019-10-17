@@ -20,13 +20,15 @@ def adventrunner(func):
             """
             pass
 
-        @main.command(help="run a certain function by name present in Initializer")
+        @main.command(
+            "run", help="run a certain function by name present in Initializer"
+        )
         @click.argument("name")
-        def run(name):
+        def run_function(name):
             initializer_defined.run(name)
 
-        @main.command(help="run all function defined in a Initializer class")
-        def all():
+        @main.command("all", help="run all function defined in a Initializer class")
+        def run_all_function():
             initializer_defined.run_all()
 
         @main.command("list", help="list out all of the available function")

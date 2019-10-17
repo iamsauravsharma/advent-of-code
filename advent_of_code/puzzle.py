@@ -25,11 +25,11 @@ class _Puzzle:
 
     def __call__(self):
         if self.input_file is None:
-            input = cache_file_data(self.year, self.day, self.session)
+            input_data = cache_file_data(self.year, self.day, self.session)
         else:
             with open(self.input_file) as f:
-                input = f.read()
-        answer = self.function(input)
+                input_data = f.read()
+        answer = self.function(input_data)
         if answer is not None:
             for session_list in self.session:
                 if self.operation_type == "submit":

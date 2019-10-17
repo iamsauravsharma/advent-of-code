@@ -97,7 +97,6 @@ def remove_cache(year, day, session):
         day = list(range(1, 26))
     if session == ():
         session = get_all_session()
-    print(year, day, session)
     for y in year:
         for d in day:
             for s in session:
