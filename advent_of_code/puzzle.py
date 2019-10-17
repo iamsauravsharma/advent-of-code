@@ -15,8 +15,8 @@ class _Puzzle:
         self.year = year
         self.day = day
         self.part = part
-        if self.session is None:
-            self.session == get_all_session()
+        if session is None:
+            self.session = get_all_session()
         else:
             self.session = session
         self.operation_type = operation_type
