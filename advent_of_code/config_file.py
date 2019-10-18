@@ -129,4 +129,8 @@ def get_all_session():
     data = __read_json_file(config_file)
     json_dict = json.loads(data.to_json())
     json_data = json_dict.get("session_list")
-    return list[json_data.keys()]
+    session_list = list(json_data.keys())
+    if not session_list:
+        raise Exception("No session value is set")
+    else:
+        return session_list

@@ -43,61 +43,67 @@ def remove_config_data(name):
 @click.option(
     "--year",
     "-y",
+    "years",
     multiple=True,
     help="Pass input download year [default: latest year]",
 )
 @click.option(
     "--day",
     "-d",
+    "days",
     multiple=True,
     help="Pass input download day [default: latest day or day 1 of old year]",
 )
 @click.option(
     "--session",
     "-s",
+    "sessions",
     multiple=True,
     help="Pass session name or use all session as default",
 )
-def download(year, day, session):
-    if year == ():
-        year = [get_current_year()]
-    if day == ():
-        day = [get_day()]
-    if session == ():
-        session = get_all_session()
-    for y in year:
-        for d in day:
-            for s in session:
-                download_input(y, d, s)
+def download(years, days, sessions):
+    if not years:
+        years = [get_current_year()]
+    if not days:
+        days = [get_day()]
+    if not sessions:
+        sessions = get_all_session()
+    for year in years:
+        for day in days:
+            for session in sessions:
+                download_input(year, day, session)
 
 
 @main.command("remove", help="delete a input file from cache folder")
 @click.option(
     "--year",
     "-y",
+    "years",
     multiple=True,
     help="Year from which input is to be delete default all",
 )
 @click.option(
     "--day",
     "-d",
+    "days",
     multiple=True,
     help="Day from which input file is to be delete default all day",
 )
 @click.option(
     "--session",
     "-s",
+    "sessions",
     multiple=True,
     help="Session from which input file is to be deleted default all session",
 )
-def remove_cache(year, day, session):
-    if year == ():
-        year = list(range(2015, get_current_year() + 1))
-    if day == ():
-        day = list(range(1, 26))
-    if session == ():
-        session = get_all_session()
-    for y in year:
-        for d in day:
-            for s in session:
-                delete_input(y, d, s)
+def remove_cache(years, days, sessions):
+    if not years:
+        years = list(range(2015, get_current_year() + 1))
+    if not days:
+        days = list(range(1, 26))
+    if not sessions:
+        sessions = get_all_session()
+    for year in years:
+        for day in days:
+            for session in sessions:
+                delete_input(year, day, session)
