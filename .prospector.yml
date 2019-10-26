@@ -1,0 +1,15 @@
+strictness: veryhigh
+
+pep8:
+  full: true
+  options:
+    max-line-length: 88
+
+pylint:
+  disable:
+    - cyclic-import
+    - unused-variable
+    - too-many-arguments
+    - too-few-public-methods
+  options:
+    max-line-length: 88
