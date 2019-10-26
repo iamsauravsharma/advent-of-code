@@ -8,23 +8,23 @@ import appdirs
 
 def check_if_downloaded(year, day, session):
     """Check if an input is downloaded and cached or not in cache location"""
-    cache_file = __join_path(year, day, session, input_file=True)
+    cache_file = _join_path(year, day, session, input_file=True)
     cache_file = Path(cache_file)
     return cache_file.exists()
 
 
-def save_input_to_location(year, day, session, input):
+def save_input_to_location(year, day, session, input_data):
     """Save a input to its cache location for future reference and use"""
-    cache_folder = __join_path(year, day, session)
+    cache_folder = _join_path(year, day, session)
     Path(cache_folder).mkdir(parents=True, exist_ok=True)
     cache_file = os.path.join(cache_folder, "input.txt")
-    with open(cache_file, "w+") as f:
-        f.write(input)
+    with open(cache_file, "w+") as opened_file:
+        opened_file.write(input_data)
 
 
 def delete_input(year, day, session):
     """Delete input from a cache folder"""
-    cache_file = __join_path(year, day, session, input_file=True)
+    cache_file = _join_path(year, day, session, input_file=True)
     if Path(cache_file).exists():
         os.remove(cache_file)
 
@@ -34,52 +34,54 @@ def cache_file_data(year, day, session):
     from .server_action import download_input
 
     download_input(year, day, session)
-    cache_file = __join_path(year, day, session, input_file=True)
-    with open(cache_file) as f:
-        input_data = f.read()
+    cache_file = _join_path(year, day, session, input_file=True)
+    with open(cache_file) as opened_file:
+        input_data = opened_file.read()
     return input_data
 
 
 def save_submitted_answer(year, day, part, session, output, message):
     """Save submitted input to file of problem"""
-    submitted_file = __join_path(year, day, session, submission=True)
-    with open(submitted_file, "a") as f:
-        f.write("{}!{}:{}\n".format(part, output, message))
+    submitted_file = _join_path(year, day, session, submission=True)
+    with open(submitted_file, "a") as opened_file:
+        opened_file.write("{}!{}:{}\n".format(part, output, message))
 
 
 def check_if_answer_is_present(year, day, part, session, output):
     """Check if answer is already submitted by user"""
-    submission_file = __join_path(year, day, session, submission=True)
-    with open(submission_file, "r") as f:
-        lines = f.read()
+    submission_file = _join_path(year, day, session, submission=True)
+    last_submitted_answer = None
+    with open(submission_file, "r") as opened_file:
+        lines = opened_file.read()
         for line in lines:
             seprate_part = line.split("!", 1)
             if seprate_part[0] == part:
                 seprate_output = seprate_part[1].split(":", 1)
                 if seprate_output == output:
-                    return seprate_output[1]
+                    last_submitted_answer = seprate_output[1]
+    return last_submitted_answer
 
 
 def save_last_submission_time(year, day, session):
     """Save a time where a request is performed for last submission"""
-    last_time_file = __join_path(year, day, session, last_file=True)
-    with open(last_time_file, "w") as f:
-        f.write(str(time.time()))
+    last_time_file = _join_path(year, day, session, last_file=True)
+    with open(last_time_file, "w") as opened_file:
+        opened_file.write(str(time.time()))
 
 
 def check_last_submission_time(year, day, session):
     """Check last submission date return error message if time is less than 60 second"""
-    last_time_file = __join_path(year, day, session, last_file=True)
-    with open(last_time_file, "r") as f:
-        last_time = float(f.read())
+    last_time_file = _join_path(year, day, session, last_file=True)
+    message = None
+    with open(last_time_file, "r") as opened_file:
+        last_time = float(opened_file.read())
         current_time = time.time()
         if current_time - last_time < 60.0:
-            return "You have to wait for 1 min before submitting next solution"
+            message = "You have to wait for 1 min before submitting next solution"
+    return message
 
 
-def __join_path(
-    year, day, session, input_file=False, submission=False, last_file=False
-):
+def _join_path(year, day, session, input_file=False, submission=False, last_file=False):
     """Return out desire path for a config folders and files"""
     cache_location = appdirs.user_cache_dir(appname="advent-of-code")
     cache_file = os.path.join(cache_location, str(session), str(year), str(day))

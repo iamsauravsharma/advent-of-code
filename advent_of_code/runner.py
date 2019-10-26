@@ -13,9 +13,8 @@ def adventrunner(func):
     def create_command():
         initializer_defined = func()
 
-        @click.group()
+        @click.group(help="CLI tool created from a provided Initializer Object")
         def main():
-            """CLI tool created from a provided Initializer Object"""
             pass
 
         @main.command(

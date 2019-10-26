@@ -14,8 +14,7 @@ def get_current_year():
     date_time = datetime.datetime.now(tz=EASTERN)
     if date_time.month < 12:
         return date_time.year - 1
-    else:
-        return date_time.year
+    return date_time.year
 
 
 def get_day():
@@ -23,5 +22,4 @@ def get_day():
     date_time = datetime.datetime.now(tz=EASTERN)
     if date_time.month == 12:
         return min(date_time.day, 25)
-    else:
-        return 25
+    return 25

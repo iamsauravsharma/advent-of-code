@@ -27,8 +27,8 @@ class _Puzzle:
         if self.input_file is None:
             input_data = cache_file_data(self.year, self.day, self.session)
         else:
-            with open(self.input_file) as f:
-                input_data = f.read()
+            with open(self.input_file) as opened_file:
+                input_data = opened_file.read()
         answer = self.function(input_data)
         if answer is not None:
             for session_list in self.session:

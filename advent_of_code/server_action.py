@@ -20,8 +20,8 @@ def download_input(year, day, session):
     session_value = get_session_value(session)
     if not check_if_downloaded(year, day, session):
         input_url = INPUT_URL.format(year, day)
-        input = requests.get(input_url, cookies={"session": session_value})
-        save_input_to_location(year, day, session, input.text)
+        html_data = requests.get(input_url, cookies={"session": session_value})
+        save_input_to_location(year, day, session, html_data.text)
 
 
 def submit_output(year, day, part, session, output):
@@ -58,7 +58,7 @@ def submit_output(year, day, part, session, output):
                     message = (
                         "You have to wait for 1 min before submitting next solution"
                     )
-                elif "That's the right answer":
+                elif "That's the right answer" in text_data:
                     message = "Congratulation, you have solved question successfully"
                     save_submitted_answer(
                         year,
@@ -69,7 +69,5 @@ def submit_output(year, day, part, session, output):
                         "Congratulation, you have solved question correctly",
                     )
             return message
-        else:
-            return last_submitted_message
-    else:
-        return submitted_message
+        return last_submitted_message
+    return submitted_message

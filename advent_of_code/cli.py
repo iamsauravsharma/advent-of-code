@@ -7,9 +7,8 @@ from .server_action import download_input
 from .utils import get_current_year, get_day
 
 
-@click.group()
+@click.group(help="CLI tool to perform action related to advent-of-code")
 def main():
-    """CLI tool to perform action related to advent-of-code"""
     pass
 
 

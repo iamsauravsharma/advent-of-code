@@ -36,19 +36,19 @@ class Data:
             raise Exception("Value with name {} not found over config".format(session))
 
 
-def __read_json_file(config_file):
+def _read_json_file(config_file):
     """Read JSON file to return Data type"""
     if not config_file.exists():
-        with open(config_file, "a+") as f:
+        with open(config_file, "a+") as opened_file:
             val = Data()
-            f.write(val.to_json())
-    with open(config_file) as f:
-        val = f.read()
+            opened_file.write(val.to_json())
+    with open(config_file) as opened_file:
+        val = opened_file.read()
         data = Data.from_json(val)
     return data
 
 
-def __config_file_data():
+def _config_file_data():
     """Get Config file location"""
     config_location = appdirs.user_config_dir()
     config_file = os.path.join(config_location, "aoc-config.json")
@@ -58,26 +58,26 @@ def __config_file_data():
 
 def add_to_json(**kwargs):
     """Add new session to json config file"""
-    config_file = __config_file_data()
-    data = __read_json_file(config_file)
+    config_file = _config_file_data()
+    data = _read_json_file(config_file)
     data.add_session(**kwargs)
-    with open(config_file, "w") as f:
-        f.write(data.to_json())
+    with open(config_file, "w") as opened_file:
+        opened_file.write(data.to_json())
 
 
 def delete_from_json(session):
     """Delete session from JSON config file"""
-    config_file = __config_file_data()
-    data = __read_json_file(config_file)
+    config_file = _config_file_data()
+    data = _read_json_file(config_file)
     data.delete_session(session)
-    with open(config_file, "w") as f:
-        f.write(data.to_json())
+    with open(config_file, "w") as opened_file:
+        opened_file.write(data.to_json())
 
 
 def list_from_json():
     """List all session from a JSON file along with value"""
-    config_file = __config_file_data()
-    data = __read_json_file(config_file)
+    config_file = _config_file_data()
+    data = _read_json_file(config_file)
     json_dict = json.loads(data.to_json())
     json_data = json_dict.get("session_list")
     for key, val in json_data.items():
@@ -86,25 +86,23 @@ def list_from_json():
 
 def get_session_value(session_name):
     """Return session name value from JSON config file"""
-    config_file = __config_file_data()
-    data = __read_json_file(config_file)
+    config_file = _config_file_data()
+    data = _read_json_file(config_file)
     json_dict = json.loads(data.to_json())
     json_data = json_dict.get("session_list")
     session_value = json_data.get(session_name)
     if session_value is not None:
         return session_value
-    else:
-        raise Exception("{} key is not present in config file".format(session_name))
+    raise Exception("{} key is not present in config file".format(session_name))
 
 
 def get_all_session():
     """Return all session name"""
-    config_file = __config_file_data()
-    data = __read_json_file(config_file)
+    config_file = _config_file_data()
+    data = _read_json_file(config_file)
     json_dict = json.loads(data.to_json())
     json_data = json_dict.get("session_list")
     session_list = list(json_data.keys())
-    if not session_list:
-        raise Exception("No session value is set")
-    else:
+    if session_list:
         return session_list
+    raise Exception("No session value is set")

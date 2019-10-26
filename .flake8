@@ -1,4 +1,0 @@
-[flake8]
-# make max line length equal to a black convention
-max-line-length=88
-exclude= */__init__.py,.venv/
