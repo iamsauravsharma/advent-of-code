@@ -15,7 +15,7 @@ def get_current_year():
     if date_time.month < 12:
         return date_time.year - 1
     else:
-        return date_time
+        return date_time.year
 
 
 def get_day():
