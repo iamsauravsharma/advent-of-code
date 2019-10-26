@@ -5,13 +5,12 @@ from .server_action import submit_output
 
 
 class _Puzzle:
-    """
-    Puzzle class for handling out a puzzle decorator
-    """
+    """Puzzle class for handling out a puzzle decorator"""
 
     def __init__(
         self, function, operation_type, year, day, part, session=None, input_file=None
     ):
+        """Initialize _Puzzle class"""
         self.function = function
         self.year = year
         self.day = day
@@ -24,6 +23,7 @@ class _Puzzle:
         self.input_file = input_file
 
     def __call__(self):
+        """Caller for _Puzzle class"""
         if self.input_file is None:
             input_data = cache_file_data(self.year, self.day, self.session)
         else:

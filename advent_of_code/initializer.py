@@ -1,5 +1,5 @@
 """
-initializer module which defines Initializer class which initialize advent of code
+initializer module which defines Initializer class for initializing advent of code
 function runner
 """
 import inspect
@@ -16,37 +16,20 @@ class Initializer:
     function_list = {}
 
     def add(self, **kwargs):
-        """
-        Add a function to a Initializer class.
-        To add function to Initializer list pass `alias_of_function=function`
-        as kwargs value. \n
-        For example:-\n
-        `initializer_name.add("solve1"=day1)`\n
-        will add function day1 and alias
-        it as solve1
-        """
+        """Add a function to a Initializer class"""
         self.function_list.update(kwargs)
 
     def run(self, function_alias):
-        """
-        Run a certain function by their name/alias \n
-        For example:-\n
-        `initializer_name.run("solve1")`\n
-        will run any function which is aliased as solve1
-        """
+        """Run a certain function by their name/alias"""
         self.function_list.get(function_alias)()
 
     def run_all(self):
-        """
-        Run all functions which are added to `Initializer`
-        """
+        """Run all functions which are added to `Initializer`"""
         for value in self.function_list.values():
             value()
 
     def list_functions(self):
-        """
-        List out all of the function and its location along with its alias
-        """
+        """List out all of the function and its location along with its alias"""
         for (keys, value) in self.function_list.items():
             print(
                 "{:10} -> {}.{}".format(

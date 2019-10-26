@@ -1,4 +1,4 @@
-"""Main CLI for advent-of-code tool"""
+"""Main CLI for advent-of-code helper tool"""
 import click
 
 from .cache_file import delete_input
@@ -9,9 +9,7 @@ from .utils import get_current_year, get_day
 
 @click.group()
 def main():
-    """
-    CLI tool to perform action related to advent-of-code
-    """
+    """CLI tool to perform action related to advent-of-code"""
     pass
 
 

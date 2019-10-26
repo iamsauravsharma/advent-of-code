@@ -1,6 +1,4 @@
-"""
-utility module used to find current year and day for advent of code solution download
-"""
+"""utility module used to find latest year and day for advent of code problems"""
 import datetime
 
 from dateutil.tz import gettz
@@ -21,11 +19,9 @@ def get_current_year():
 
 
 def get_day():
-    """
-    Get latest day or set a latest day as 1 if this is not month of December
-    """
+    """Get latest day or set a latest day as 25 if this is not month of December"""
     date_time = datetime.datetime.now(tz=EASTERN)
     if date_time.month == 12:
         return min(date_time.day, 25)
     else:
-        return 1
+        return 25
