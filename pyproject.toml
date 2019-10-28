@@ -20,7 +20,7 @@ requests="2.22.0"
 python-dateutil="2.8.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "5.2.1"
+pytest = "5.2.2"
 black = "19.3b0"
 isort = "4.3.21"
 prospector = {version = "1.1.7", extras = ["with_everything"]}
