@@ -2,9 +2,9 @@
 import requests
 
 from .cache_file import (
-    check_if_answer_is_present,
     check_if_downloaded,
-    check_last_submission_time,
+    check_less_than_one_min_submission,
+    last_submitted_answer_message,
     save_input_to_location,
     save_last_submission_time,
     save_submitted_answer,
@@ -28,10 +28,12 @@ def submit_output(year, day, part, session, output):
     """Submit solution output to a advent of code server"""
     session_value = get_session_value(session)
     submit_url = SUBMIT_URL.format(year, day)
-    submitted_message = check_if_answer_is_present(year, day, part, session, output)
+    submitted_message = last_submitted_answer_message(year, day, part, session, output)
     if submitted_message is None:
-        last_submitted_message = check_last_submission_time(year, day, session)
-        if last_submitted_message is None:
+        early_submission = check_less_than_one_min_submission(year, day, session)
+        if early_submission:
+            message = "You have to wait for 1 min before submitting next solution"
+        else:
             data = {"level": part, "answer": output}
             save_last_submission_time(year, day, session)
             response = requests.post(
@@ -68,6 +70,5 @@ def submit_output(year, day, part, session, output):
                         output,
                         "Congratulation, you have solved question correctly",
                     )
-            return message
-        return last_submitted_message
+        return message
     return submitted_message

@@ -47,10 +47,13 @@ def save_submitted_answer(year, day, part, session, output, message):
         opened_file.write("{}!{}:{}\n".format(part, output, message))
 
 
-def check_if_answer_is_present(year, day, part, session, output):
-    """Check if answer is already submitted by user"""
+def last_submitted_answer_message(year, day, part, session, output):
+    """
+    Check if answer is already submitted by user if submitted return message of last
+    submission
+    """
     submission_file = _join_path(year, day, session, submission=True)
-    last_submitted_answer = None
+    last_answer_message = None
     with open(submission_file, "r") as opened_file:
         lines = opened_file.read()
         for line in lines:
@@ -58,8 +61,8 @@ def check_if_answer_is_present(year, day, part, session, output):
             if seprate_part[0] == part:
                 seprate_output = seprate_part[1].split(":", 1)
                 if seprate_output == output:
-                    last_submitted_answer = seprate_output[1]
-    return last_submitted_answer
+                    last_answer_message = seprate_output[1]
+    return last_answer_message
 
 
 def save_last_submission_time(year, day, session):
@@ -69,16 +72,16 @@ def save_last_submission_time(year, day, session):
         opened_file.write(str(time.time()))
 
 
-def check_last_submission_time(year, day, session):
-    """Check last submission date return error message if time is less than 60 second"""
+def check_less_than_one_min_submission(year, day, session):
+    """
+    Check last submission time for solution return true if time is less than 60 second
+    """
     last_time_file = _join_path(year, day, session, last_file=True)
-    message = None
     with open(last_time_file, "r") as opened_file:
         last_time = float(opened_file.read())
         current_time = time.time()
-        if current_time - last_time < 60.0:
-            message = "You have to wait for 1 min before submitting next solution"
-    return message
+        early_submission = current_time - last_time < 60.0
+    return early_submission
 
 
 def _join_path(year, day, session, input_file=False, submission=False, last_file=False):
