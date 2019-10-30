@@ -5,7 +5,8 @@
 
 | Travis Build Status | Code style | License |
 | :---: | :---: | :---: |
-| [![Travis Build Status][build_badge]][build_link] | [![Code style][black_badge]][black_link] | [![License: MIT][license_badge]][license_link] |
+| [![Travis Build Status][build_badge]][build_link] [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fiamsauravsharma%2Fadvent-of-code.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fiamsauravsharma%2Fadvent-of-code?ref=badge_shield)
+| [![Code style][black_badge]][black_link] | [![License: MIT][license_badge]][license_link] |
 
 [advent_of_code_link]: https://adventofcode.com
 
@@ -17,3 +18,7 @@
 
 [license_badge]: https://img.shields.io/github/license/iamsauravsharma/advent-of-code.svg
 [license_link]: LICENSE
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fiamsauravsharma%2Fadvent-of-code.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fiamsauravsharma%2Fadvent-of-code?ref=badge_large)
