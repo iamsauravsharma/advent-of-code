@@ -6,7 +6,7 @@ from dateutil.tz import gettz
 EASTERN = gettz("America/New_York")
 
 
-def get_current_year():
+def get_current_year() -> int:
     """
     Get latest year of advent of code return old year if month is not December
     otherwise return current year
@@ -17,7 +17,7 @@ def get_current_year():
     return date_time.year
 
 
-def get_day():
+def get_day() -> int:
     """Get latest day or set a latest day as 25 if this is not month of December"""
     date_time = datetime.datetime.now(tz=EASTERN)
     if date_time.month == 12:

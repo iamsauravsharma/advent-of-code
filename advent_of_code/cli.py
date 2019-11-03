@@ -1,4 +1,6 @@
 """Main CLI for advent-of-code helper tool"""
+from typing import List
+
 import click
 
 from .cache_file import delete_input
@@ -20,7 +22,7 @@ def config():
 @config.command(help="add session to config")
 @click.argument("name")
 @click.argument("session_value")
-def add(name, session_value):
+def add(name: str, session_value: str):
     data_list = {name: session_value}
     add_to_json(**data_list)
 
@@ -32,7 +34,7 @@ def list_config_session():
 
 @config.command("remove", help="remove session from config")
 @click.argument("name")
-def remove_config_data(name):
+def remove_config_data(name: str):
     delete_from_json(name)
 
 
@@ -58,7 +60,7 @@ def remove_config_data(name):
     multiple=True,
     help="Pass session name or use all session as default",
 )
-def download(years, days, sessions):
+def download(years: List[int], days: List[int], sessions: List[int]):
     if not years:
         years = [get_current_year()]
     if not days:
@@ -93,7 +95,7 @@ def download(years, days, sessions):
     multiple=True,
     help="Session from which input file is to be deleted default all session",
 )
-def remove_cache(years, days, sessions):
+def remove_cache(years: List[int], days: List[int], sessions: List[int]):
     if not years:
         years = list(range(2015, get_current_year() + 1))
     if not days:

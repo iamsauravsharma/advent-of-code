@@ -19,7 +19,7 @@ class Initializer:
         """Add a function to a Initializer class"""
         self.function_list.update(kwargs)
 
-    def run(self, function_alias):
+    def run(self, function_alias: str):
         """Run a certain function by their name/alias"""
         self.function_list.get(function_alias)()
 
