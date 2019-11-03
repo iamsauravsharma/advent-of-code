@@ -29,5 +29,17 @@ script:
   - black ./ --check
   - isort --recursive --check-only .
 
+before_deploy:
+  - portray as_html -ov
+
+deploy:
+  - provider: pages
+    edge: true
+    github_token: $GITHUB_TOKEN
+    local_dir: "site"
+    committer_from_gh: true
+    on:
+      branch: master
+
 notifications:
   email: false

@@ -6,8 +6,24 @@ from pathlib import Path
 import appdirs
 
 
-def check_if_downloaded(year, day, session):
-    """Check if an input is downloaded and cached or not in cache location"""
+def check_if_downloaded(year: int, day: int, session: int) -> bool:
+    """
+    Check if an input is downloaded and cached or not in cache location
+
+    ***Parameters***
+
+    - `year`: *int*
+    :   Year for which input download need to be checked out
+    - `day`: *int*
+    :    Day for which input download need to be checked out
+    - `session`: *str*
+    :    Session for which input download need to be checked out
+
+    ***Returns***
+
+    - *bool*
+    :    Returns out whether input for problem is downloaded for not
+    """
     cache_file = _join_path(year, day, session, input_file=True)
     cache_file = Path(cache_file)
     return cache_file.exists()
