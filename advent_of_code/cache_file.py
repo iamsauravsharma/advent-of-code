@@ -53,7 +53,7 @@ def last_submitted_answer_message(year, day, part, session, output):
     submission
     """
     submission_file = _join_path(year, day, session, submission=True)
-    last_answer_message = None
+    last_answer_message = ""
     with open(submission_file, "r") as opened_file:
         lines = opened_file.read()
         for line in lines:

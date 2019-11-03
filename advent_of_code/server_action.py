@@ -29,7 +29,7 @@ def submit_output(year, day, part, session, output):
     session_value = get_session_value(session)
     submit_url = SUBMIT_URL.format(year, day)
     submitted_message = last_submitted_answer_message(year, day, part, session, output)
-    if submitted_message is None:
+    if not submitted_message:
         early_submission = check_less_than_one_min_submission(year, day, session)
         if early_submission:
             message = "You have to wait for 1 min before submitting next solution"
