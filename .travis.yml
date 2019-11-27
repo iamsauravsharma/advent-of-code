@@ -26,8 +26,8 @@ before_script:
 script: 
   - pytest -v
   - prospector
-  - black ./ --check
-  - isort --recursive --check-only .
+  - black ./ --check --verbose
+  - isort ./ --recursive --check-only --verbose
 
 before_deploy:
   - portray as_html -ov

@@ -1,0 +1,10 @@
+Usage: advent-of-code download [OPTIONS]
+
+  download solution from advent-of-code server
+
+Options:
+  -y, --year TEXT     Pass input download year [default: latest year]
+  -d, --day TEXT      Pass input download day [default: latest day or day 1 of
+                      old year]
+  -s, --session TEXT  Pass session name or use all session as default
+  --help              Show this message and exit.

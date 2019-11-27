@@ -1,0 +1,11 @@
+Usage: advent-of-code remove [OPTIONS]
+
+  delete a input file from cache folder
+
+Options:
+  -y, --year TEXT     Year from which input is to be delete default all
+  -d, --day TEXT      Day from which input file is to be delete default all
+                      day
+  -s, --session TEXT  Session from which input file is to be deleted default
+                      all session
+  --help              Show this message and exit.

@@ -1,0 +1,11 @@
+Usage: advent-of-code [OPTIONS] COMMAND [ARGS]...
+
+  CLI tool to perform action related to advent-of-code
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  config    perform action related to config file
+  download  download solution from advent-of-code server
+  remove    delete a input file from cache folder
