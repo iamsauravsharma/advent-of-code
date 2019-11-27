@@ -14,7 +14,7 @@ before_install:
   - poetry --version
 
 install:
-  - poetry update -v
+  - poetry install -v
   - poetry show -v
 
 before_script:
