@@ -19,6 +19,11 @@ class Initializer:
         """Add a function to a Initializer class"""
         self.function_list.update(kwargs)
 
+    def extend(self, another_initializer):
+        """Extends initializer with addition of another initialier to it"""
+        for (keys, value) in another_initializer.get_function_list().items():
+            self.function_list.update(keys=value)
+
     def run(self, function_alias: str):
         """Run a certain function by their name/alias"""
         self.function_list.get(function_alias)()
@@ -36,3 +41,7 @@ class Initializer:
                     keys, inspect.getmodule(value).__name__, value.__name__
                 )
             )
+
+    def get_function_list(self):
+        """Return out all function_list which contain function_alias and function"""
+        return self.function_list
