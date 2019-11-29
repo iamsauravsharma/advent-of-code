@@ -32,14 +32,14 @@ After importing a library you can now use out either two decorator solve or subm
 For example:-
 ```python
 @advent_of_code.submit(2018,3,1,session="<session-name>")
-def puzzle_2018_3_10(input):
+def puzzle_2018_3_1(input):
     # do some calculation
     return final_output
 ```
 
 Now after decorating out function now you can call out function
 ```python
-puzzle_2018_3_10()
+puzzle_2018_3_1()
 ```
 After calling out function `final_output` value will be submitted out to advent-of-code server for 2018 year day 3
 problem then returns out whether submitted answer was correct or not. If session value is not provided then
@@ -53,10 +53,14 @@ To set advent-of-code puzzle as CLI
 def main_cli():
     initializer = advent_of_code.Initializer()
     initializer.add("<function_alias>"="<function>")
+    # for example to run above function you can write out
+    initializer.add("2018-3-1"=puzzle_2018_3_1)  
     # add other function
     return initializer
 ```
 Now you can set out main_cli as entry points and it will create out CLI with appropriate name and function which was added.
+So for example to run out function puzzle_2018_3_1() you have to run out command as `entry-point-name run 2018-3-1` which
+will run appropriate function as well as submit as desired.
 
 [advent_of_code_link]: https://adventofcode.com
 
