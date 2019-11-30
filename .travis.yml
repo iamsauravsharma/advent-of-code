@@ -18,13 +18,11 @@ install:
   - poetry show -v
 
 before_script:
-  - pytest --version
   - prospector --version
   - black --version
   - isort --version
 
-script: 
-  - pytest -v
+script:
   - prospector
   - black ./ --check --verbose
   - isort ./ --recursive --check-only --verbose
