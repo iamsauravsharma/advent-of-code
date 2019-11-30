@@ -1,5 +1,8 @@
 # Advent-of-code
-(WIP) [Advent of Code][advent_of_code_link] helper CLI and library for python projects
+[Advent of Code][advent_of_code_link] helper CLI and library for python projects.
+
+**Note:**
+Currently it is still in beta stage which may have lots of bug please report out bug if you find any
 
 **Status & Info:**
 
@@ -12,7 +15,13 @@
 ### Installation
 To install out advent-of-code run out following command which install out advent-of-code cli and advent_of_code library.
 ```bash
-poetry add --git=https://github.com/iamsauravsharma/advent-of-code
+pip install advent-of-code
+```
+
+__OR__
+
+```bash
+poetry add advent-of-code
 ```
 
 ### Usage

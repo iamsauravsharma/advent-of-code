@@ -5,6 +5,9 @@ __pycache__/
 #Python Virtual environment
 .venv/
 
+#Poetry dist folder
+dist/
+
 #Packaging
 *.egg-info/
 pip-wheel-metadata/

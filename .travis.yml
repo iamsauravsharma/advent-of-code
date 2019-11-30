@@ -31,8 +31,15 @@ script:
 
 before_deploy:
   - portray as_html -ov
+  - chmod -R 777 ci
 
 deploy:
+  - provider: script
+    script: bash ci/deploy_pypi.sh
+    skip-cleanup: true
+    on:
+      tags: true
+
   - provider: pages
     edge: true
     github_token: $GITHUB_TOKEN
