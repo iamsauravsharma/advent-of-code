@@ -18,20 +18,23 @@ class _Puzzle:
         if session is None:
             self.session = get_all_session()
         else:
-            self.session = session
+            if isinstance(session, list):
+                self.session = session
+            else:
+                self.session = [session]
         self.operation_type = operation_type
         self.input_file = input_file
 
     def __call__(self):
         """Caller for _Puzzle class"""
-        if self.input_file is None:
-            input_data = cache_file_data(self.year, self.day, self.session)
-        else:
-            with open(self.input_file) as opened_file:
-                input_data = opened_file.read()
-        answer = self.function(input_data)
-        if answer is not None:
-            for session_list in self.session:
+        for session_list in self.session:
+            if self.input_file is None:
+                input_data = cache_file_data(self.year, self.day, session_list)
+            else:
+                with open(self.input_file) as opened_file:
+                    input_data = opened_file.read()
+            answer = self.function(input_data)
+            if answer is not None:
                 if self.operation_type == "submit":
                     message = submit_output(
                         self.year, self.day, self.part, session_list, answer
