@@ -25,6 +25,14 @@ class _Puzzle:
         self.operation_type = operation_type
         self.input_file = input_file
 
+    def __repr__(self):
+        """return repr value of class which is set to function __name__"""
+        return "{}".format(self.function.__name__)
+
+    def getfunction(self):
+        """get out function from a class"""
+        return self.function
+
     def __call__(self):
         """Caller for _Puzzle class"""
         for session_list in self.session:

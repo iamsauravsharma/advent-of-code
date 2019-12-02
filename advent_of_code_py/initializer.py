@@ -33,11 +33,11 @@ class Initializer:
             value()
 
     def list_functions(self):
-        """List out all of the function and its location along with its alias"""
+        """List out all of the function and its alias"""
         for (keys, value) in self.function_list.items():
             print(
                 "{:10} -> {}.{}".format(
-                    keys, inspect.getmodule(value).__name__, value.__name__
+                    keys, inspect.getmodule(value.getfunction()).__name__, value
                 )
             )
 
