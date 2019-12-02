@@ -21,8 +21,7 @@ class Initializer:
 
     def extend(self, another_initializer):
         """Extends initializer with addition of another initialier to it"""
-        for (keys, value) in another_initializer.get_function_list().items():
-            self.function_list.update(keys=value)
+        self.function_list.update(another_initializer)
 
     def run(self, function_alias: str):
         """Run a certain function by their name/alias"""
