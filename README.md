@@ -6,9 +6,9 @@ Currently it is still in beta stage which may have lots of bug please report out
 
 **Status & Info:**
 
-| Travis Build Status | Code style | License |
-| :---: | :---: | :---: |
-| [![Travis Build Status][build_badge]][build_link] | [![Code style][black_badge]][black_link] | [![License: MIT][license_badge]][license_link] |
+| Travis Build Status | Code style | License | Project Version |
+| :---: | :---: | :---: | :---: |
+| [![Travis Build Status][build_badge]][build_link] | [![Code style][black_badge]][black_link] | [![License: MIT][license_badge]][license_link] | [![PyPI][project_badge]][project_link] |
 
 ## Usage
 
@@ -81,3 +81,6 @@ will run appropriate function as well as submit as desired.
 
 [license_badge]: https://img.shields.io/github/license/iamsauravsharma/advent-of-code-py.svg
 [license_link]: LICENSE
+
+[project_badge]: https://img.shields.io/pypi/v/advent-of-code-py?color=blue&logo=python
+[project_link]: https://pypi.org/project/advent-of-code-py
