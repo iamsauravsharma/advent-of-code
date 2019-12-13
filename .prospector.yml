@@ -8,8 +8,9 @@ pep8:
 pylint:
   disable:
     - cyclic-import
-    - unused-variable
+    - import-outside-toplevel
     - too-many-arguments
     - too-few-public-methods
+    - unused-variable
   options:
     max-line-length: 88
