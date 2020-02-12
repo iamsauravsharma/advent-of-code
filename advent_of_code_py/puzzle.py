@@ -7,7 +7,7 @@ from .server_action import submit_output
 class _Puzzle:
     """Puzzle class for handling out a puzzle decorator"""
 
-    def __init__(
+    def __init__(  # pylint:disable=too-many-arguments
         self,
         function,
         operation_type: str,

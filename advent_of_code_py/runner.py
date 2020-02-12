@@ -20,16 +20,16 @@ def adventrunner(func):
         @main.command(
             "run", help="run a certain function by name present in Initializer"
         )
-        @click.argument("name")
+        @click.argument("name")  # pylint:disable=unused-variable
         def run_function(name):
             initializer_defined.run(name)
 
         @main.command("all", help="run all function defined in a Initializer class")
-        def run_all_function():
+        def run_all_function():  # pylint:disable=unused-variable
             initializer_defined.run_all()
 
         @main.command("list", help="list out all of the available function")
-        def list_functions():
+        def list_functions():  # pylint:disable=unused-variable
             initializer_defined.list_functions()
 
         return main()
