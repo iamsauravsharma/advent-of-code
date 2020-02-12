@@ -8,7 +8,14 @@ class _Puzzle:
     """Puzzle class for handling out a puzzle decorator"""
 
     def __init__(
-        self, function, operation_type, year, day, part, session=None, input_file=None
+        self,
+        function,
+        operation_type: str,
+        year: int,
+        day: int,
+        part: int,
+        session: str = None,
+        input_file: str = None,
     ):
         """Initialize _Puzzle class"""
         self.function = function
@@ -79,7 +86,7 @@ class _Puzzle:
                     )
 
 
-def submit(year, day, part, session=None, input_file=None):
+def submit(year: int, day: int, part: int, session: str = None, input_file: str = None):
     """
     Puzzle decorator used to submit a solution to advent_of_code server and provide
     result. If input_file is not present then it tries to download file and cache it
@@ -94,7 +101,7 @@ def submit(year, day, part, session=None, input_file=None):
     return _action
 
 
-def solve(year, day, part, session=None, input_file=None):
+def solve(year: int, day: int, part: int, session: str = None, input_file: str = None):
     """
     Puzzle decorator used to only solve a solution & print output value. It doesn't
     submit output to advent of code server to validate out whether an answer is correct

@@ -19,7 +19,7 @@ class Initializer:
         """Add a function to a Initializer class"""
         self.function_list.update(kwargs)
 
-    def extend(self, another_initializer):
+    def extend(self, another_initializer: "Initializer"):
         """Extends initializer with addition of another initialier to it"""
         self.function_list.update(another_initializer.get_function_list())
 
