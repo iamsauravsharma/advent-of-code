@@ -1,36 +1,25 @@
 """module used for defining puzzle decorator for submiting or solving problem"""
+from typing import Callable, List, Optional, TypeVar
+
+from pydantic import BaseModel
+
 from .cache_file import cache_file_data
 from .config_file import get_all_session
 from .server_action import submit_output
 
+T = TypeVar("T")  # pylint:disable=invalid-name
 
-class _Puzzle:
+
+class _Puzzle(BaseModel):
     """Puzzle class for handling out a puzzle decorator"""
 
-    def __init__(  # pylint:disable=too-many-arguments
-        self,
-        function,
-        operation_type: str,
-        year: int,
-        day: int,
-        part: int,
-        session: str = None,
-        input_file: str = None,
-    ):
-        """Initialize _Puzzle class"""
-        self.function = function
-        self.year = year
-        self.day = day
-        self.part = part
-        if session is None:
-            self.session = get_all_session()
-        else:
-            if isinstance(session, list):
-                self.session = session
-            else:
-                self.session = [session]
-        self.operation_type = operation_type
-        self.input_file = input_file
+    function: Callable[[str], T]
+    year: int
+    day: int
+    part: int
+    session: List[str] = get_all_session()
+    operation_type: str
+    input_file: Optional[str] = None
 
     def __repr__(self):
         """return repr value of class which is set to function __name__"""
@@ -86,7 +75,13 @@ class _Puzzle:
                     )
 
 
-def submit(year: int, day: int, part: int, session: str = None, input_file: str = None):
+def submit(
+    year: int,
+    day: int,
+    part: int,
+    session_list: Optional[List[str]] = None,
+    input_file: Optional[str] = None,
+):
     """
     Puzzle decorator used to submit a solution to advent_of_code server and provide
     result. If input_file is not present then it tries to download file and cache it
@@ -96,12 +91,30 @@ def submit(year: int, day: int, part: int, session: str = None, input_file: str 
 
     def _action(function):
         operation_type = "submit"
-        return _Puzzle(function, operation_type, year, day, part, session, input_file)
+        if not session_list:
+            session = get_all_session()
+        else:
+            session = session_list
+        return _Puzzle(
+            function=function,
+            operation_type=operation_type,
+            year=year,
+            day=day,
+            part=part,
+            session=session,
+            input_file=input_file,
+        )
 
     return _action
 
 
-def solve(year: int, day: int, part: int, session: str = None, input_file: str = None):
+def solve(
+    year: int,
+    day: int,
+    part: int,
+    session_list: Optional[List[str]] = None,
+    input_file: Optional[str] = None,
+):
     """
     Puzzle decorator used to only solve a solution & print output value. It doesn't
     submit output to advent of code server to validate out whether an answer is correct
@@ -113,6 +126,18 @@ def solve(year: int, day: int, part: int, session: str = None, input_file: str =
 
     def _action(function):
         operation_type = "solve"
-        return _Puzzle(function, operation_type, year, day, part, session, input_file)
+        if not session_list:
+            session = get_all_session()
+        else:
+            session = session_list
+        return _Puzzle(
+            function=function,
+            operation_type=operation_type,
+            year=year,
+            day=day,
+            part=part,
+            session=session,
+            input_file=input_file,
+        )
 
     return _action

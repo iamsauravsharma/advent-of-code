@@ -2,10 +2,17 @@
 initializer module which defines Initializer class for initializing advent of code
 function runner
 """
+from __future__ import annotations
+
 import inspect
+from typing import Callable, Dict, TypeVar
+
+from pydantic import BaseModel
+
+T = TypeVar("T")  # pylint:disable=invalid-name
 
 
-class Initializer:
+class Initializer(BaseModel):
     """
     Initialize class which is used to initialize an advent of code function runner.
     Initialize create out a basic class which is used for adding of different
@@ -13,13 +20,13 @@ class Initializer:
     one simple CLI tool.
     """
 
-    function_list = {}
+    function_list: Dict[str, Callable[[str], T]] = {}
 
     def add(self, **kwargs):
         """Add a function to a Initializer class"""
         self.function_list.update(kwargs)
 
-    def extend(self, another_initializer: "Initializer"):
+    def extend(self, another_initializer: Initializer):
         """Extends initializer with addition of another initialier to it"""
         self.function_list.update(another_initializer.get_function_list())
 
