@@ -104,6 +104,4 @@ def get_all_session() -> List[str]:
     json_dict = json.loads(data.to_json())
     json_data = json_dict.get("session_list")
     session_list = list(json_data.keys())
-    if session_list:
-        return session_list
-    raise Exception("No session value is set")
+    return session_list
