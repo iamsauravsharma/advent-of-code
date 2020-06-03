@@ -2,7 +2,7 @@
 import click
 
 
-def adventrunner(func):
+def advent_runner(func):
     """
     Advent of code runner decorator which decorate out a function for a simple CLI
     tool creation. Function which is decorated using a advent of code runner should

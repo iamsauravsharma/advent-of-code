@@ -40,9 +40,9 @@ After importing a library you can now use out either two decorator solve or subm
 
 For example:-
 ```python
-@advent_of_code_py.submit(2018,3,1,session="<session-name>")
-def puzzle_2018_3_1(input):
-    # do some calculation
+@advent_of_code_py.submit(2018,3,1,session_list="<session-name>")
+def puzzle_2018_3_1(data=None):
+    # do some calculation with data and return final output
     return final_output
 ```
 
@@ -58,17 +58,17 @@ You can also use out advent-of-code-py builtin Initializer and runner to create 
 tool for problem so problem can be run easily
 To set advent-of-code-py puzzle as CLI
 ```python
-@advent_of_code_py.adventrunner()
+@advent_of_code_py.advent_runner()
 def main_cli():
     initializer = advent_of_code_py.Initializer()
     initializer.add("<function_alias>"="<function>")
     # for example to run above function you can write out
-    initializer.add("2018-3-1"=puzzle_2018_3_1)  
+    initializer.add(p_3_1=puzzle_2018_3_1)
     # add other function
     return initializer
 ```
 Now you can set out main_cli as entry points and it will create out CLI with appropriate name and function which was added.
-So for example to run out function puzzle_2018_3_1() you have to run out command as `entry-point-name run 2018-3-1` which
+So for example to run out function puzzle_2018_3_1() you have to run out command as `entry-point-name run p_3_1` which
 will run appropriate function as well as submit as desired.
 
 [advent_of_code_link]: https://adventofcode.com
