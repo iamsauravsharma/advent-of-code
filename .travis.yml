@@ -38,6 +38,7 @@ deploy:
     skip-cleanup: true
     on:
       tags: true
+      condition: $TRAVIS_PYTHON_VERSION = 3.8
 
   - provider: pages
     edge: true
