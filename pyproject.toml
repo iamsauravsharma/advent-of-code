@@ -35,10 +35,10 @@ python-dateutil = "^2.8.0"
 requests = "^2.22.0"
 
 [tool.poetry.dev-dependencies]
-black = "19.10b0"
-isort = "4.3.21"
-portray = "1.4.0"
-prospector = {version = "1.3.0", extras = ["with_everything"]}
+black = "^19.10b0"
+isort = "^4.3.21"
+portray = "^1.4.0"
+prospector = "^1.3.0"
 
 [tool.poetry.scripts]
 advent-of-code-py = "advent_of_code_py.cli:main"
