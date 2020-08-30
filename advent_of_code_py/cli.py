@@ -27,7 +27,7 @@ def add(name: str, session_value: str):
     add_to_json(**data_list)
 
 
-@config.command("list", help="list out all session present in config")
+@config.command("list", help="list all session present in config")
 def list_config_session():
     list_from_json()
 

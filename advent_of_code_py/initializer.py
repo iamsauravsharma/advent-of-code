@@ -15,7 +15,7 @@ T = TypeVar("T")  # pylint:disable=invalid-name
 class Initializer(BaseModel):
     """
     Initialize class which is used to initialize an advent of code function runner.
-    Initialize create out a basic class which is used for adding of different
+    Initialize create a basic class which is used for adding of different
     function of advent of code solution so all of functions can be easily run with
     one simple CLI tool.
     """
@@ -40,7 +40,7 @@ class Initializer(BaseModel):
             value()
 
     def list_functions(self):
-        """List out all of the function and its alias"""
+        """List all of the function and its alias"""
         for (keys, value) in self.function_list.items():
             print(
                 "{:10} -> {}.{}".format(
@@ -49,5 +49,5 @@ class Initializer(BaseModel):
             )
 
     def get_function_list(self):
-        """Return out all function_list which contain function_alias and function"""
+        """Return all function_list which contain function_alias and function"""
         return self.function_list

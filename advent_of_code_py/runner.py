@@ -4,10 +4,9 @@ import click
 
 def advent_runner(func):
     """
-    Advent of code runner decorator which decorate out a function for a simple CLI
+    Advent of code runner decorator which decorates a function for a simple CLI
     tool creation. Function which is decorated using a advent of code runner should
-    return out a Initializer class so it can create out a CLI from Initializer class
-    object
+    return a Initializer class so it can create a CLI from Initializer class object
     """
 
     def create_command():
@@ -28,7 +27,7 @@ def advent_runner(func):
         def run_all_function():  # pylint:disable=unused-variable
             initializer_defined.run_all()
 
-        @main.command("list", help="list out all of the available function")
+        @main.command("list", help="list all of the available function")
         def list_functions():  # pylint:disable=unused-variable
             initializer_defined.list_functions()
 

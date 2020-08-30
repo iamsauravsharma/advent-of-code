@@ -11,7 +11,7 @@ T = TypeVar("T")  # pylint:disable=invalid-name
 
 
 class _Puzzle(BaseModel):
-    """Puzzle class for handling out a puzzle decorator"""
+    """Puzzle class for handling a puzzle decorator"""
 
     function: Callable[[str], T]
     year: int
@@ -22,11 +22,11 @@ class _Puzzle(BaseModel):
     input_file: Optional[str] = None
 
     def __repr__(self):
-        """return repr value of class which is set to function __name__"""
+        """Return repr value of class which is set to function __name__"""
         return "{}".format(self.function.__name__)
 
     def getfunction(self):
-        """get out function from a class"""
+        """Get function from a class"""
         return self.function
 
     def __call__(self):
@@ -86,7 +86,7 @@ def submit(
     Puzzle decorator used to submit a solution to advent_of_code server and provide
     result. If input_file is not present then it tries to download file and cache it
     for submiting solution else it require to be provided with input_file path which
-    input it can use out
+    input it can use.
     """
 
     def _action(function):
@@ -117,8 +117,8 @@ def solve(
 ):
     """
     Puzzle decorator used to only solve a solution & print output value. It doesn't
-    submit output to advent of code server to validate out whether an answer is correct
-    or not. By default it downloads out input file from advent-of-code server. Puzzle
+    submit output to advent of code server to validate whether an answer is correct
+    or not. By default it downloads input file from advent-of-code server. Puzzle
     can also be solved by using custom file location with help of input_file parameter
     while using input_file year, day, part are required even if they are not used for
     only reference purpose of printing output.

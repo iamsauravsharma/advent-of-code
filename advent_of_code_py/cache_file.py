@@ -90,7 +90,7 @@ def check_less_than_one_min_submission(year: int, day: int, session: str) -> boo
 
 
 def _join_path(year: int, day: int, session: str, file_type: str = None) -> str:
-    """Return out desire path for a cache folders or files"""
+    """Return desire path for a cache folders or files"""
     cache_location = appdirs.user_cache_dir(appname="advent-of-code")
     cache_file = os.path.join(cache_location, str(session), str(year), str(day))
     if file_type == "input_file":
