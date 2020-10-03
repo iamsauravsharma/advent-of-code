@@ -1,4 +1,3 @@
-# pylint:disable=cyclic-import
 """Module which performs cache file related operation stored over CACHE_DIR of OS"""
 import os
 import time
@@ -32,7 +31,7 @@ def delete_input(year: int, day: int, session: str):
 
 def cache_file_data(year: int, day: int, session: str) -> str:
     """Return cache file input data from cache folder for certain problem"""
-    from .server_action import download_input  # pylint:disable=import-outside-toplevel
+    from .server_action import download_input
 
     download_input(year, day, session)
     cache_file = _join_path(year, day, session, file_type="input_file")
@@ -41,7 +40,7 @@ def cache_file_data(year: int, day: int, session: str) -> str:
     return input_data
 
 
-def save_submitted_answer(  # pylint:disable=too-many-arguments
+def save_submitted_answer(
     year: int, day: int, part: int, session: str, answer: str, message: str
 ):
     """Save submitted input to file of problem"""

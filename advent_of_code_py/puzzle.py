@@ -7,7 +7,7 @@ from .cache_file import cache_file_data
 from .config_file import get_all_session
 from .server_action import submit_output
 
-T = TypeVar("T")  # pylint:disable=invalid-name
+T = TypeVar("T")
 
 
 class _Puzzle(BaseModel):

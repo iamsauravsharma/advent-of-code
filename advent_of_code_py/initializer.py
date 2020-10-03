@@ -9,7 +9,7 @@ from typing import Callable, Dict, TypeVar
 
 from pydantic import BaseModel
 
-T = TypeVar("T")  # pylint:disable=invalid-name
+T = TypeVar("T")
 
 
 class Initializer(BaseModel):

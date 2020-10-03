@@ -19,14 +19,14 @@ install:
   - poetry show -v
 
 before_script:
-  - prospector --version
+  - flake8 --version
   - black --version
   - isort --version
 
 script:
-  - prospector
-  - black ./ --check --verbose
-  - isort ./ --recursive --check-only --verbose
+  - flake8
+  - black . --check --verbose
+  - isort . --check-only --verbose
 
 before_deploy:
   - portray as_html -ov
