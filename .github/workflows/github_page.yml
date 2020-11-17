@@ -1,0 +1,30 @@
+name: Deploy github pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  deploy_page:
+    name: Deploy Github page
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.6
+      - name: Install portray
+        run: |
+          pip install portray
+      - name: Build Page
+        run: |
+          portray as_html -ov
+      - name: Deploy GitHub Page
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: site

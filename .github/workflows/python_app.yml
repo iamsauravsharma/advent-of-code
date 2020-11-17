@@ -1,0 +1,38 @@
+name: Check python application
+
+on:
+  push:
+    branches:
+      - master
+      - staging
+      - trying
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.6
+      - name: Setup pyenv
+        run: |
+          curl https://pyenv.run | bash
+          export PATH="$HOME/.pyenv/bin:$PATH"
+          pyenv install 3.8.6
+          pyenv install 3.7.9
+      - name: Setup poetry
+        uses: Gr1N/setup-poetry@v4
+        with:
+          python-version: 3.8
+      - name: Enable poetry
+        run: |
+          source $HOME/.poetry/env
+      - name: Install nox and nox-poetry
+        run: |
+          pip3 install nox nox-poetry
+      - name: Run nox
+        run: |
+          nox

@@ -1,0 +1,29 @@
+name: Deploy to pypi
+
+on:
+  push:
+    tags: "v*"
+
+jobs:
+  publish_pypi:
+    name: Publish to pypi
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.6
+      - name: Setup pyenv
+        run: |
+          curl https://pyenv.run | bash
+          export PATH="$HOME/.pyenv/bin:$PATH"
+          pyenv install 3.8.6
+          pyenv install 3.7.9
+      - name: Setup poetry
+        uses: Gr1N/setup-poetry@v4
+      - name: Publish
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          poetry publish --username=__token__ --password="$PYPI_TOKEN" --build
