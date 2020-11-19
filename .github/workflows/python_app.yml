@@ -16,16 +16,13 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.8.6
-      - name: Setup pyenv
-        run: |
-          curl https://pyenv.run | bash
-          export PATH="$HOME/.pyenv/bin:$PATH"
-          eval "$(pyenv init -)"
-          eval "$(pyenv virtualenv-init -)"
-          pyenv install 3.8.6
-          pyenv install 3.7.9
-          pyenv global 3.8.6 3.7.9
+          python-version: 3.9
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
       - name: Setup poetry
         uses: Gr1N/setup-poetry@v4
       - name: Enable poetry
