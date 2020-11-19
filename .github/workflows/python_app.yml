@@ -21,12 +21,13 @@ jobs:
         run: |
           curl https://pyenv.run | bash
           export PATH="$HOME/.pyenv/bin:$PATH"
+          eval "$(pyenv init -)"
+          eval "$(pyenv virtualenv-init -)"
           pyenv install 3.8.6
           pyenv install 3.7.9
+          pyenv global 3.8.6 3.7.9
       - name: Setup poetry
         uses: Gr1N/setup-poetry@v4
-        with:
-          python-version: 3.8
       - name: Enable poetry
         run: |
           source $HOME/.poetry/env
