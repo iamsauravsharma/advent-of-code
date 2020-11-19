@@ -16,12 +16,10 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.8.6
-      - name: Install portray
-        run: |
-          pip install portray
+      - uses: Gr1N/setup-poetry@v4
       - name: Build Page
         run: |
-          portray as_html -ov
+          poetry run portray as_html -ov
       - name: Deploy GitHub Page
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
