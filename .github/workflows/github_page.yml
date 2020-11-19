@@ -15,11 +15,13 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.8.6
-      - uses: Gr1N/setup-poetry@v4
+          python-version: 3.9
+      - name: Install portray
+        run: |
+          pip3 install portray
       - name: Build Page
         run: |
-          poetry run portray as_html -ov
+          portray as_html -ov
       - name: Deploy GitHub Page
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:

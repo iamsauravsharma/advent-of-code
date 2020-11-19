@@ -1,7 +1,7 @@
 import nox
 import nox_poetry
 
-python_versions = ["3.7", "3.8"]
+python_versions = ["3.7", "3.8", "3.9"]
 
 
 @nox.session(python=python_versions)
