@@ -24,11 +24,9 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install
-      - name: Activate virtualenv
-        run: |
-          source .venv/bin/activate
       - name: Build Page
         run: |
+          source .venv/bin/activate
           portray as_html -ov
       - name: Deploy GitHub Page
         uses: JamesIves/github-pages-deploy-action@3.7.1
