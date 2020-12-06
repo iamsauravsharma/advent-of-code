@@ -28,7 +28,7 @@ jobs:
         run: |
           source .venv/bin/activate
           portray as_html -ov
-      - name: Install SSH Client 🔑
+      - name: Install SSH Client
         uses: webfactory/ssh-agent@v0.4.1
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
