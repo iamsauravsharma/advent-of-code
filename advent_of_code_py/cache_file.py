@@ -2,6 +2,7 @@
 import os
 import time
 from pathlib import Path
+from typing import Optional
 
 import appdirs
 
@@ -88,7 +89,9 @@ def check_less_than_one_min_submission(year: int, day: int, session: str) -> boo
     return early_submission
 
 
-def _join_path(year: int, day: int, session: str, file_type: str = None) -> str:
+def _join_path(
+    year: int, day: int, session: str, file_type: Optional[str] = None
+) -> str:
     """Return desire path for a cache folders or files"""
     cache_location = appdirs.user_cache_dir(appname="advent-of-code")
     cache_file = os.path.join(cache_location, str(session), str(year), str(day))
