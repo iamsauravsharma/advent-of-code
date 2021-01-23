@@ -2,7 +2,7 @@
 [Advent of Code][advent_of_code_link] helper CLI and library for python projects.
 
 **Note:**
-Currently it is still in beta stage which may have lots of bug please report bugs if you find any within library
+Currently, it is still in beta stage which may have lots of bugs please report bugs if you find any within library
 
 **Status & Info:**
 
@@ -13,7 +13,7 @@ Currently it is still in beta stage which may have lots of bug please report bug
 ## Usage
 
 ### Installation
-To install advent-of-code-py run following command which installs advent-of-code-py cli and advent_of_code_py library.
+To install advent-of-code-py run following command which installs advent-of-code-py CLI and advent_of_code_py library.
 ```bash
 pip install advent-of-code-py
 ```
@@ -36,7 +36,7 @@ Now you can import library by using
 import advent_of_code_py
 ```
 
-After importing a library you can use either two decorator present which are solve or submit decorator for a function of puzzle
+After importing a library you can use either two decorator present which are solve and submit decorator for a function of puzzle
 
 For example:-
 ```python
@@ -54,8 +54,8 @@ After calling function `final_output` value will be submitted by library to Adve
 problem, then returns whether the submitted answer was correct or not. If session value is not provided then
 the solution will be submitted to all session value present in config file.
 
-You can also use advent-of-code-py builtin Initializer and runner to create appropriate CLI tool for problem so
-problem can be run easily from CLI instead of modifying python file every time to all appropriate function
+You can also use advent-of-code-py builtin Initializer and runner to create appropriate CLI for problem so
+problem can be run from CLI instead of modifying python file every time to run appropriate function
 To set advent-of-code-py puzzle as CLI
 ```python
 @advent_of_code_py.advent_runner()
@@ -67,10 +67,10 @@ def main_cli():
     # add other function
     return initializer
 ```
-Now you can set main_cli as entry points and it will create CLI with appropriate name and function which was added.
+Now you can set main_cli as entry points, and it will create CLI with the appropriate name and function which was added.
 So for example to run function puzzle_2018_3_1() you have to run command as `entry-point-name run p_3_1` which
-will run appropriate function as well as submit as desired if function was decorated by submit decorator or else only
-prints its output.
+will run the appropriate function as well as submit as desired if the function was decorated by submit decorator or else
+prints its output if the function was decorated by solve decorator.
 
 [advent_of_code_link]: https://adventofcode.com
 
