@@ -1,9 +1,6 @@
 # Advent-of-code-py
 [Advent of Code][advent_of_code_link] helper CLI and library for python projects.
 
-**Note:**
-Currently, it is still in beta stage which may have lots of bugs please report bugs if you find any within library
-
 **Status & Info:**
 
 | Code style | License | Project Version |
@@ -74,11 +71,11 @@ prints its output if the function was decorated by solve decorator.
 
 [advent_of_code_link]: https://adventofcode.com
 
-[black_badge]: https://img.shields.io/badge/code%20style-black-000000.svg
+[black_badge]: https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge
 [black_link]: https://github.com/ambv/black
 
-[license_badge]: https://img.shields.io/github/license/iamsauravsharma/advent-of-code-py.svg
+[license_badge]: https://img.shields.io/github/license/iamsauravsharma/advent-of-code-py.svg?style=for-the-badge
 [license_link]: LICENSE
 
-[project_badge]: https://img.shields.io/pypi/v/advent-of-code-py?color=blue&logo=python
+[project_badge]: https://img.shields.io/pypi/v/advent-of-code-py?style=for-the-badge&color=blue&logo=python
 [project_link]: https://pypi.org/project/advent-of-code-py

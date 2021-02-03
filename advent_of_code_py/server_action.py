@@ -41,7 +41,7 @@ def submit_output(year: int, day: int, part: int, session: str, output: str) -> 
             )
             if response.status_code != 200:
                 message = (
-                    "Error Submiting a Solution Online doesn't got response code 200"
+                    "Error submiting solution online. Returned non 200 status code"
                 )
             else:
                 text_data = response.text
@@ -69,6 +69,10 @@ def submit_output(year: int, day: int, part: int, session: str, output: str) -> 
                         session,
                         output,
                         "Congratulation, you have solved question correctly",
+                    )
+                else:
+                    message = (
+                        "Got unknown message. Please retry if answered is not submitted"
                     )
         return message
     return submitted_message
