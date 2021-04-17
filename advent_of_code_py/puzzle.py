@@ -1,8 +1,6 @@
 """module used for defining puzzle decorator for submiting or solving problem"""
 from typing import Callable, List, Optional, TypeVar
 
-from pydantic import BaseModel
-
 from .cache_file import cache_file_data
 from .config_file import get_all_session
 from .server_action import submit_output
@@ -10,7 +8,7 @@ from .server_action import submit_output
 T = TypeVar("T")
 
 
-class _Puzzle(BaseModel):
+class _Puzzle:
     """Puzzle class for handling a puzzle decorator"""
 
     function: Callable[[str], T]
@@ -116,7 +114,7 @@ def solve(
     input_file: Optional[str] = None,
 ):
     """
-    Puzzle decorator used to only solve a solution & print output value. It doesn't
+    Puzzle decorator used to only solve a problem & print output value. It doesn't
     submit output to advent of code server to validate whether an answer is correct
     or not. By default it downloads input file from advent-of-code server. Puzzle
     can also be solved by using custom file location with help of input_file parameter

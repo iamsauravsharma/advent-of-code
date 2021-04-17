@@ -7,12 +7,10 @@ from __future__ import annotations
 import inspect
 from typing import Callable, Dict, TypeVar
 
-from pydantic import BaseModel
-
 T = TypeVar("T")
 
 
-class Initializer(BaseModel):
+class Initializer:
     """
     Initialize class which is used to initialize an advent of code function runner.
     Initialize create a basic class which is used for adding of different
@@ -36,8 +34,8 @@ class Initializer(BaseModel):
 
     def run_all(self):
         """Run all functions which are added to `Initializer`"""
-        for value in self.function_list.values():
-            value()
+        for function in self.function_list.values():
+            function()
 
     def list_functions(self):
         """List all of the function and its alias"""
