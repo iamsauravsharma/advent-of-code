@@ -1,4 +1,5 @@
 """Module which performs cache file related operation stored over CACHE_DIR of OS"""
+import importlib
 import os
 import time
 from pathlib import Path
@@ -32,9 +33,8 @@ def delete_input(year: int, day: int, session: str):
 
 def cache_file_data(year: int, day: int, session: str) -> str:
     """Return cache file input data from cache folder for certain problem"""
-    from .server_action import download_input
-
-    download_input(year, day, session)
+    server_action = importlib.import_module(".server_action")
+    server_action.download_input(year, day, session)
     cache_file = _join_path(year, day, session, file_type="input_file")
     with open(cache_file) as opened_file:
         input_data = opened_file.read()
