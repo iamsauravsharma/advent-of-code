@@ -1,5 +1,7 @@
 #Python Cache
 __pycache__/
+
+# Pytest cache
 .pytest_cache/
 
 #Python Virtual environment

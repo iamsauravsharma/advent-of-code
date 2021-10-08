@@ -44,14 +44,14 @@ def remove_config_data(name: str):
     "-y",
     "years",
     multiple=True,
-    help="Pass input download year [default: latest year]",
+    help="Pass input download year [default: latest year of problem]",
 )
 @click.option(
     "--day",
     "-d",
     "days",
     multiple=True,
-    help="Pass input download day [default: latest day or day 1 of old year]",
+    help="Pass input download day [default: latest problem day or day 1 of old year]",
 )
 @click.option(
     "--session",
