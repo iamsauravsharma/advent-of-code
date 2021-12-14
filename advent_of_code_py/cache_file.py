@@ -9,7 +9,7 @@ import appdirs
 
 
 def check_if_downloaded(year: int, day: int, session: str) -> bool:
-    """Check if an input is downloaded and cached or not in cache location"""
+    """Check if an input is downloaded and cached"""
     cache_file = _join_path(year, day, session, file_type="input_file")
     cache_file = Path(cache_file)
     return cache_file.exists()
