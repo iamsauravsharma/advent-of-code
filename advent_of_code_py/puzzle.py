@@ -49,7 +49,7 @@ class _Puzzle:
                                 self.day,
                                 self.part,
                                 answer,
-                                u"\u2713",
+                                "\u2713",
                                 message,
                             )
                         )
@@ -61,7 +61,7 @@ class _Puzzle:
                                 self.day,
                                 self.part,
                                 answer,
-                                u"\u274C",
+                                "\u274C",
                                 message,
                             )
                         )
