@@ -58,10 +58,10 @@ To set advent-of-code-py puzzle as CLI
 @advent_of_code_py.advent_runner()
 def main_cli():
     initializer = advent_of_code_py.Initializer()
-    initializer.add("<function_alias>"="<function>")
+    initializer.add(<function_alias>=<function>)
     # for example to run above function you can write
     initializer.add(p_3_1=puzzle_2018_3_1)
-    # add other function
+    # add other functions ...
     return initializer
 ```
 Now you can set main_cli as entry points, and it will create CLI with the appropriate name and function which was added.
