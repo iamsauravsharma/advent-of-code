@@ -41,10 +41,3 @@ pytest = "^7.0.0"
 
 [tool.poetry.scripts]
 advent-of-code-py = "advent_of_code_py.cli:main"
-
-[tool.portray]
-modules = ["advent_of_code_py"]
-
-[tool.portray.mkdocs.theme]
-name = "material"
-palette = { primary = "black", accent = "indigo" }

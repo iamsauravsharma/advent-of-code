@@ -8,14 +8,14 @@ from typing import Optional
 import appdirs
 
 
-def check_if_downloaded(year: int, day: int, session: str) -> bool:
+def input_data_is_downloaded(year: int, day: int, session: str) -> bool:
     """Check if an input is downloaded and cached"""
     cache_file = _join_path(year, day, session, file_type="input_file")
     cache_file = Path(cache_file)
     return cache_file.exists()
 
 
-def save_input_to_location(year: int, day: int, session: str, input_data: str):
+def save_input_to_cache(year: int, day: int, session: str, input_data: str):
     """Save a input to its cache location for future reference and use"""
     cache_folder = _join_path(year, day, session)
     Path(cache_folder).mkdir(parents=True, exist_ok=True)
@@ -62,11 +62,11 @@ def last_submitted_answer_message(
     with open(submission_file, "r") as opened_file:
         lines = opened_file.read()
         for line in lines:
-            seprate_part = line.split("!", 1)
-            if seprate_part[0] == part:
-                seprate_output = seprate_part[1].split(":", 1)
-                if seprate_output == output:
-                    last_answer_message = seprate_output[1]
+            separate_part = line.split("!", 1)
+            if separate_part[0] == part:
+                separate_output = separate_part[1].split(":", 1)
+                if separate_output == output:
+                    last_answer_message = separate_output[1]
     return last_answer_message
 
 

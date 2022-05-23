@@ -18,14 +18,16 @@ class Initializer:
     one simple CLI tool.
     """
 
-    function_list: Dict[str, Callable[[str], T]] = {}
+    def __init__(self):
+        """Initialize a Initializer class"""
+        self.function_list: Dict[str, Callable[[str], T]] = {}
 
     def add(self, **kwargs):
         """Add a function to a Initializer class"""
         self.function_list.update(kwargs)
 
     def extend(self, another_initializer: Initializer):
-        """Extends initializer with addition of another initialier to it"""
+        """Extends initializer with addition of another initializer to it"""
         self.function_list.update(another_initializer.get_function_list())
 
     def run(self, function_alias: str):
@@ -42,7 +44,7 @@ class Initializer:
         for (keys, value) in self.function_list.items():
             print(
                 "{:10} -> {}.{}".format(
-                    keys, inspect.getmodule(value.getfunction()).__name__, value
+                    keys, inspect.getmodule(value.get_function()).__name__, value
                 )
             )
 

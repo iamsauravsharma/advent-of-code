@@ -1,4 +1,4 @@
-"""module used for defining puzzle decorator for submiting or solving problem"""
+"""module used for defining puzzle decorator for submitting or solving problem"""
 from typing import Callable, List, Optional, TypeVar
 
 from .cache_file import cache_file_data
@@ -11,27 +11,41 @@ T = TypeVar("T")
 class _Puzzle:
     """Puzzle class for handling a puzzle decorator"""
 
-    function: Callable[[str], T]
-    year: int
-    day: int
-    part: int
-    session: List[str] = get_all_session()
-    operation_type: str
-    input_file: Optional[str] = None
+    def __init__(
+        self,
+        function: Callable[[str], T],
+        year: int,
+        day: int,
+        part: int,
+        operation_type: str,
+        input_file: Optional[str] = None,
+        sessions: Optional[List[str]] = None,
+    ):
+        """Initialize _Puzzle class"""
+        self.function: Callable[[str], T] = function
+        self.year: int = year
+        self.day: int = day
+        self.part: int = part
+        self.operation_type: str = operation_type
+        self.input_file: Optional[str] = input_file
+        if sessions is None:
+            self.sessions: List[str] = get_all_session()
+        else:
+            self.sessions: List[str] = sessions
 
     def __repr__(self):
         """Return repr value of class which is set to function __name__"""
         return "{}".format(self.function.__name__)
 
-    def getfunction(self):
+    def get_function(self):
         """Get function from a class"""
         return self.function
 
     def __call__(self):
         """Caller for _Puzzle class"""
-        for session_list in self.session:
+        for session in self.sessions:
             if self.input_file is None:
-                input_data = cache_file_data(self.year, self.day, session_list)
+                input_data = cache_file_data(self.year, self.day, session)
             else:
                 with open(self.input_file) as opened_file:
                     input_data = opened_file.read()
@@ -39,12 +53,12 @@ class _Puzzle:
             if answer is not None:
                 if self.operation_type == "submit":
                     message = submit_output(
-                        self.year, self.day, self.part, session_list, answer
+                        self.year, self.day, self.part, session, answer
                     )
                     if message.contains("Congratulation"):
                         print(
                             "{}:{}-{}-{}: {} {} {}".format(
-                                session_list,
+                                session,
                                 self.year,
                                 self.day,
                                 self.part,
@@ -56,7 +70,7 @@ class _Puzzle:
                     else:
                         print(
                             "{}:{}-{}-{}: {} {} {}".format(
-                                session_list,
+                                session,
                                 self.year,
                                 self.day,
                                 self.part,
@@ -68,7 +82,7 @@ class _Puzzle:
                 elif self.operation_type == "solve":
                     print(
                         "{}:{}-{}-{}: {}".format(
-                            session_list, self.year, self.day, self.part, answer
+                            session, self.year, self.day, self.part, answer
                         )
                     )
 
@@ -83,23 +97,19 @@ def submit(
     """
     Puzzle decorator used to submit a solution to advent_of_code server and provide
     result. If input_file is not present then it tries to download file and cache it
-    for submiting solution else it require to be provided with input_file path which
+    for submitting solution else it require to be provided with input_file path which
     input it can use.
     """
 
     def _action(function):
         operation_type = "submit"
-        if not session_list:
-            session = get_all_session()
-        else:
-            session = session_list
         return _Puzzle(
             function=function,
             operation_type=operation_type,
             year=year,
             day=day,
             part=part,
-            session=session,
+            sessions=session_list,
             input_file=input_file,
         )
 
@@ -124,17 +134,13 @@ def solve(
 
     def _action(function):
         operation_type = "solve"
-        if not session_list:
-            session = get_all_session()
-        else:
-            session = session_list
         return _Puzzle(
             function=function,
             operation_type=operation_type,
             year=year,
             day=day,
             part=part,
-            session=session,
+            sessions=session_list,
             input_file=input_file,
         )
 
