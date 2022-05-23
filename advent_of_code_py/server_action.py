@@ -2,8 +2,8 @@
 import requests
 
 from .cache_file import (
-    input_data_is_downloaded,
     check_less_than_one_min_submission,
+    input_data_is_downloaded,
     last_submitted_answer_message,
     save_input_to_cache,
     save_last_submission_time,
