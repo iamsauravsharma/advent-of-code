@@ -1,11 +1,17 @@
 """module used for defining puzzle decorator for submitting or solving problem"""
 from typing import Callable, List, Optional, TypeVar
+from enum import Enum
 
 from .cache_file import cache_file_data
 from .config_file import get_all_session
 from .server_action import submit_output
 
 T = TypeVar("T")
+
+
+class OperationType(Enum):
+    SUBMIT = "submit"
+    SOLVE = "solve"
 
 
 class _Puzzle:
@@ -17,7 +23,7 @@ class _Puzzle:
         year: int,
         day: int,
         part: int,
-        operation_type: str,
+        operation_type: OperationType,
         input_file: Optional[str] = None,
         sessions: Optional[List[str]] = None,
     ):
@@ -26,7 +32,7 @@ class _Puzzle:
         self.year: int = year
         self.day: int = day
         self.part: int = part
-        self.operation_type: str = operation_type
+        self.operation_type: OperationType = operation_type
         self.input_file: Optional[str] = input_file
         if sessions is None:
             self.sessions: List[str] = get_all_session()
@@ -51,7 +57,7 @@ class _Puzzle:
                     input_data = opened_file.read()
             answer = self.function(input_data)
             if answer is not None:
-                if self.operation_type == "submit":
+                if self.operation_type == OperationType.SUBMIT:
                     message = submit_output(
                         self.year, self.day, self.part, session, answer
                     )
@@ -79,7 +85,7 @@ class _Puzzle:
                                 message,
                             )
                         )
-                elif self.operation_type == "solve":
+                elif self.operation_type == OperationType.SOLVE:
                     print(
                         "{}:{}-{}-{}: {}".format(
                             session, self.year, self.day, self.part, answer
@@ -102,10 +108,9 @@ def submit(
     """
 
     def _action(function):
-        operation_type = "submit"
         return _Puzzle(
             function=function,
-            operation_type=operation_type,
+            operation_type=OperationType.SUBMIT,
             year=year,
             day=day,
             part=part,
@@ -133,10 +138,9 @@ def solve(
     """
 
     def _action(function):
-        operation_type = "solve"
         return _Puzzle(
             function=function,
-            operation_type=operation_type,
+            operation_type=OperationType.SOLVE,
             year=year,
             day=day,
             part=part,
