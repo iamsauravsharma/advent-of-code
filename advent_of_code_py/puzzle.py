@@ -1,8 +1,8 @@
 """module used for defining puzzle decorator for submitting or solving problem"""
-from typing import Callable, List, Optional, TypeVar
 from enum import Enum
+from typing import Callable, List, Optional, TypeVar
 
-from .cache_file import cache_file_data
+from .cache_file import get_cache_file_data
 from .config_file import get_all_session
 from .server_action import submit_output
 
@@ -24,7 +24,6 @@ class _Puzzle:
         day: int,
         part: int,
         operation_type: OperationType,
-        input_file: Optional[str] = None,
         sessions: Optional[List[str]] = None,
     ):
         """Initialize _Puzzle class"""
@@ -33,7 +32,6 @@ class _Puzzle:
         self.day: int = day
         self.part: int = part
         self.operation_type: OperationType = operation_type
-        self.input_file: Optional[str] = input_file
         if sessions is None:
             self.sessions: List[str] = get_all_session()
         else:
@@ -47,15 +45,12 @@ class _Puzzle:
         """Get function from a class"""
         return self.function
 
-    def __call__(self):
+    def __call__(self, input: Optional[str] = None):
         """Caller for _Puzzle class"""
         for session in self.sessions:
-            if self.input_file is None:
-                input_data = cache_file_data(self.year, self.day, session)
-            else:
-                with open(self.input_file) as opened_file:
-                    input_data = opened_file.read()
-            answer = self.function(input_data)
+            if input is None:
+                input = get_cache_file_data(self.year, self.day, session)
+            answer = self.function(input)
             if answer is not None:
                 if self.operation_type == OperationType.SUBMIT:
                     message = submit_output(
@@ -98,7 +93,6 @@ def submit(
     day: int,
     part: int,
     session_list: Optional[List[str]] = None,
-    input_file: Optional[str] = None,
 ):
     """
     Puzzle decorator used to submit a solution to advent_of_code server and provide
@@ -115,7 +109,6 @@ def submit(
             day=day,
             part=part,
             sessions=session_list,
-            input_file=input_file,
         )
 
     return _action
@@ -126,7 +119,6 @@ def solve(
     day: int,
     part: int,
     session_list: Optional[List[str]] = None,
-    input_file: Optional[str] = None,
 ):
     """
     Puzzle decorator used to only solve a problem & print output value. It doesn't
@@ -145,7 +137,6 @@ def solve(
             day=day,
             part=part,
             sessions=session_list,
-            input_file=input_file,
         )
 
     return _action

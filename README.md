@@ -38,7 +38,7 @@ After importing a library you can use either two decorator present which are sol
 For example:-
 ```python
 @advent_of_code_py.submit(2018,3,1,session_list="<session-name>")
-def puzzle_2018_3_1(data=None):
+def puzzle_2018_3_1(input=None):
     # do some calculation with data and return final output
     return final_output
 ```

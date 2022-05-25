@@ -31,7 +31,7 @@ def delete_input(year: int, day: int, session: str):
         os.remove(cache_file)
 
 
-def cache_file_data(year: int, day: int, session: str) -> str:
+def get_cache_file_data(year: int, day: int, session: str) -> str:
     """Return cache file input data from cache folder for certain problem"""
     server_action = importlib.import_module(".server_action")
     server_action.download_input(year, day, session)
