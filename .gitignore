@@ -23,5 +23,5 @@ pip-wheel-metadata/
 #UNIX file
 .directory
 
-#Portray generated html
-site/
+# MacOS
+.DS_STORE
