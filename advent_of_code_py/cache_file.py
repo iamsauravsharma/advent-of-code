@@ -5,7 +5,7 @@ import time
 from pathlib import Path
 from typing import Optional
 
-import appdirs
+from platformdirs import user_cache_dir
 
 
 def input_data_is_downloaded(year: int, day: int, session: str) -> bool:
@@ -93,7 +93,7 @@ def _join_path(
     year: int, day: int, session: str, file_type: Optional[str] = None
 ) -> str:
     """Return desire path for a cache folders or files"""
-    cache_location = appdirs.user_cache_dir(appname="advent-of-code")
+    cache_location = user_cache_dir(appname="advent-of-code")
     cache_file = os.path.join(cache_location, str(session), str(year), str(day))
     if file_type == "input_file":
         cache_file = os.path.join(cache_file, "input.txt")

@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 from typing import List
 
-import appdirs
+from platformdirs import user_config_dir
 
 
 class Data:
@@ -51,7 +51,7 @@ def _read_json_file(config_file: str) -> Data:
 
 def _config_file_data() -> str:
     """Get Config file location"""
-    config_location = appdirs.user_config_dir()
+    config_location = user_config_dir()
     config_file = os.path.join(config_location, "aoc-config.json")
     config_file = Path(config_file)
     return config_file

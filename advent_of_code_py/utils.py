@@ -1,9 +1,9 @@
 """utility module used to find latest year and day for advent of code problems"""
 import datetime
 
-from dateutil.tz import gettz
+from pytz import timezone
 
-EASTERN = gettz("America/New_York")
+EASTERN = timezone("US/Eastern")
 
 
 def get_current_year() -> int:

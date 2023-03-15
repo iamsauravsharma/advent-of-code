@@ -41,7 +41,7 @@ class Initializer:
 
     def list_functions(self):
         """List all of the function and its alias"""
-        for (keys, value) in self.function_list.items():
+        for keys, value in self.function_list.items():
             print(
                 "{:10} -> {}.{}".format(
                     keys, inspect.getmodule(value.get_function()).__name__, value
