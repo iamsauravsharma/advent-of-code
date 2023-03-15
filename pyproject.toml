@@ -7,7 +7,7 @@ profile = "black"
 
 [tool.poetry]
 name = "advent-of-code-py"
-version = "0.3.0"
+version = "0.4.0"
 description = "Advent of Code helper CLI and library"
 authors = ["Saurav Sharma <appdroiddeveloper@gmail.com>"]
 readme = "README.md"
