@@ -25,3 +25,27 @@ jobs:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           poetry publish --username=__token__ --password="$PYPI_TOKEN" --build
+
+  publish_release_note:
+    name: Publish release note
+    runs-on: ubuntu-latest
+    needs: publish_pypi
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Generate a changelog
+        uses: orhun/git-cliff-action@v1
+        id: git-cliff
+        with:
+          config: cliff.toml
+          args: -vv --current --strip header
+        env:
+          OUTPUT: CHANGELOG.md
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: ${{ steps.git-cliff.outputs.changelog }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
