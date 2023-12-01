@@ -1,10 +1,10 @@
-import nox_poetry
+from nox_poetry import session
 from nox_poetry.sessions import Session
 
-python_versions = ["3.7", "3.8", "3.9", "3.10", "3.11"]
+python_versions = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
 
-@nox_poetry.session(python=python_versions)
+@session(python=python_versions)
 def lint(session: Session):
     session.install("black", "isort", "safety", "pytest", ".")
     session.run("black", ".", "--check")

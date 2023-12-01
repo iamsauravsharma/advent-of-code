@@ -19,7 +19,7 @@ class Data:
         return json.dumps(self.__dict__, indent=4, sort_keys=True)
 
     @classmethod
-    def from_json(cls, json_str):
+    def from_json(cls, json_str: str):
         """Create Data type from JSON"""
         json_dict = json.loads(json_str)
         json_data = json_dict.get("session_list")
@@ -37,48 +37,43 @@ class Data:
             raise Exception("Value with name {} not found over config".format(session))
 
 
-def _read_json_file(config_file: str) -> Data:
+def read_json_file(config_file: Path) -> Data:
     """Read JSON file to return Data type"""
-    if not config_file.exists():
-        with open(config_file, "a+") as opened_file:
-            val = Data()
-            opened_file.write(val.to_json())
-    with open(config_file) as opened_file:
-        val = opened_file.read()
-        data = Data.from_json(val)
+    with config_file.open("a+") as opened_file:
+        opened_file.seek(0)
+        data = Data.from_json(opened_file.read())
     return data
 
 
-def _config_file_data() -> str:
+def config_file_path() -> Path:
     """Get Config file location"""
     config_location = user_config_dir()
     config_file = os.path.join(config_location, "aoc-config.json")
-    config_file = Path(config_file)
-    return config_file
+    return Path(config_file)
 
 
 def add_to_json(**kwargs: str):
     """Add new session to json config file"""
-    config_file = _config_file_data()
-    data = _read_json_file(config_file)
+    config_file = config_file_path()
+    data = read_json_file(config_file)
     data.add_session(**kwargs)
-    with open(config_file, "w") as opened_file:
+    with config_file.open("w") as opened_file:
         opened_file.write(data.to_json())
 
 
 def delete_from_json(session: str):
     """Delete session from JSON config file"""
-    config_file = _config_file_data()
-    data = _read_json_file(config_file)
+    config_file = config_file_path()
+    data = read_json_file(config_file)
     data.delete_session(session)
     with open(config_file, "w") as opened_file:
         opened_file.write(data.to_json())
 
 
-def list_from_json():
+def print_all_session():
     """List all session from a JSON file along with value"""
-    config_file = _config_file_data()
-    data = _read_json_file(config_file)
+    config_file = config_file_path()
+    data = read_json_file(config_file)
     json_dict = json.loads(data.to_json())
     json_data = json_dict.get("session_list")
     for key, val in json_data.items():
@@ -87,8 +82,8 @@ def list_from_json():
 
 def get_session_value(session_name: str) -> str:
     """Return session name value from JSON config file"""
-    config_file = _config_file_data()
-    data = _read_json_file(config_file)
+    config_file = config_file_path()
+    data = read_json_file(config_file)
     json_dict = json.loads(data.to_json())
     json_data = json_dict.get("session_list")
     session_value = json_data.get(session_name)
@@ -99,8 +94,8 @@ def get_session_value(session_name: str) -> str:
 
 def get_all_session() -> List[str]:
     """Return all session name"""
-    config_file = _config_file_data()
-    data = _read_json_file(config_file)
+    config_file = config_file_path()
+    data = read_json_file(config_file)
     json_dict = json.loads(data.to_json())
     json_data = json_dict.get("session_list")
     session_list = list(json_data.keys())

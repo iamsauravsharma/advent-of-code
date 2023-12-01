@@ -4,7 +4,12 @@ from typing import List
 import click
 
 from .cache_file import delete_input
-from .config_file import add_to_json, delete_from_json, get_all_session, list_from_json
+from .config_file import (
+    add_to_json,
+    delete_from_json,
+    get_all_session,
+    print_all_session,
+)
 from .server_action import download_input
 from .utils import get_current_year, get_day
 
@@ -29,7 +34,7 @@ def add(name: str, session_value: str):
 
 @config.command("list", help="list all session present in config")
 def list_config_session():
-    list_from_json()
+    print_all_session()
 
 
 @config.command("remove", help="remove session from config")
