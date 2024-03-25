@@ -2,6 +2,7 @@
 initializer module which defines Initializer class for initializing advent of code
 function runner
 """
+
 from __future__ import annotations
 
 import inspect

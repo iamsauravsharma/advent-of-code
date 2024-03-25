@@ -1,4 +1,5 @@
 """Module to perform config file related operation"""
+
 import json
 import os
 from pathlib import Path

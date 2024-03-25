@@ -1,4 +1,5 @@
 """utility module used to find latest year and day for advent of code problems"""
+
 import datetime
 
 from pytz import timezone

@@ -1,4 +1,5 @@
 """Advent of code runner for creating CLI for solution for easy execution"""
+
 import click
 
 
