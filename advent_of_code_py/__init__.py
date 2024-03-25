@@ -2,6 +2,7 @@
 advent of code helper module. Provide CLI and library to submit and solve advent of
 code problems easily.
 """
+
 __version__ = "0.4.0"
 
 from .initializer import Initializer

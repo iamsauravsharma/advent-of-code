@@ -1,4 +1,5 @@
 """Main CLI for advent-of-code helper tool"""
+
 from typing import List
 
 import click

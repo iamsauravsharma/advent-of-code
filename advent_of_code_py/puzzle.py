@@ -1,4 +1,5 @@
 """module used for defining puzzle decorator for submitting or solving problem"""
+
 from enum import Enum
 from typing import Callable, List, Optional, TypeVar
 
@@ -76,7 +77,7 @@ class _Puzzle:
                                 self.day,
                                 self.part,
                                 answer,
-                                "\u274C",
+                                "\u274c",
                                 message,
                             )
                         )
