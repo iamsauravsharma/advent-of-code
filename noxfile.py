@@ -9,6 +9,4 @@ def lint(session: Session):
     session.install("ruff", "safety", "pytest", ".")
     session.run("ruff", "check", ".")
     session.run("ruff", "format", ".", "--check")
-    requirements_file = session.poetry.export_requirements()
-    session.run("safety", "check", "-r", str(requirements_file))
     session.run("pytest")

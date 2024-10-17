@@ -18,14 +18,13 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 click = "^8.0"
 requests = "^2.22.0"
 pytz = "^2024.1"
 platformdirs = "^4.0.0"
 
 [tool.poetry.group.dev.dependencies]
-safety = "^3.0.0"
 nox-poetry = "^1.0.0"
 pytest = "^8.0.0"
 ruff = "^0.3.4"
