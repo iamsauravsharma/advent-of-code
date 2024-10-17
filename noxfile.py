@@ -1,7 +1,7 @@
 from nox_poetry import session
 from nox_poetry.sessions import Session
 
-python_versions = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+python_versions = ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
 
 @session(python=python_versions)
