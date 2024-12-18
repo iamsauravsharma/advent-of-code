@@ -1,5 +1,4 @@
-from nox_poetry import session
-from nox_poetry.sessions import Session
+from nox import Session, session
 
 python_versions = ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
