@@ -1,12 +1,11 @@
-[tool.poetry]
+[project]
 name = "advent-of-code-py"
 version = "0.4.0"
 description = "Advent of Code helper CLI and library"
-authors = ["Saurav Sharma <appdroiddeveloper@gmail.com>"]
+authors = [{ name = "Saurav Sharma", email = "appdroiddeveloper@gmail.com" }]
 readme = "README.md"
-license = "MIT"
-homepage = "https://github.com/iamsauravsharma/advent-of-code-py"
-repository = "https://github.com/iamsauravsharma/advent-of-code-py"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
 keywords = ["advent-of-code", "aoc", "aocpy", "advent of code"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -16,25 +15,25 @@ classifiers = [
     "Topic :: Games/Entertainment :: Puzzle Games",
     "Topic :: Software Development :: Libraries",
 ]
+dependencies = [
+    "click>=8.0,<9",
+    "platformdirs>=4,<5",
+    "pytz>=2024.1",
+    "requests>2.22.0,<3",
+]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-click = "^8.0"
-requests = "^2.22.0"
-pytz = "^2024.1"
-platformdirs = "^4.0.0"
+[project.urls]
+homepage = "https://github.com/iamsauravsharma/advent-of-code-py"
+source = "https://github.com/iamsauravsharma/advent-of-code-py"
 
-[tool.poetry.group.dev.dependencies]
-nox-poetry = "^1.0.0"
-pytest = "^8.0.0"
-ruff = "^0.3.4"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
+[project.scripts]
 advent-of-code-py = "advent_of_code_py.cli:main"
+
+[dependency-groups]
+dev = ["nox>=2024.10.9", "pytest>=8", "ruff>=0.8.3"]
 
 [tool.ruff.lint]
 select = ["I"]
+
+[tool.uv]
+package = true
