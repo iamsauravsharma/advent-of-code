@@ -21,7 +21,11 @@ def download_input(year: int, day: int, session: str):
     session_value = get_session_value(session)
     if not input_data_is_downloaded(year, day, session):
         input_url = INPUT_URL.format(year, day)
-        html_data = requests.get(input_url, cookies={"session": session_value})
+        html_data = requests.get(
+            input_url,
+            cookies={"session": session_value},
+            headers={"User-Agent": "github.com/iamsauravsharma/advent-of-code-py"},
+        )
         save_input_to_cache(year, day, session, html_data.text)
 
 
@@ -38,7 +42,10 @@ def submit_output(year: int, day: int, part: int, session: str, output: str) -> 
             data = {"level": part, "answer": output}
             save_last_submission_time(year, day, session)
             response = requests.post(
-                submit_url, data, cookies={"session": session_value}
+                submit_url,
+                data,
+                cookies={"session": session_value},
+                headers={"User-Agent": "github.com/iamsauravsharma/advent-of-code-py"},
             )
             if response.status_code != 200:
                 message = (

@@ -51,7 +51,7 @@ class _Puzzle:
         for session in self.sessions:
             if input is None:
                 input = get_cache_file_data(self.year, self.day, session)
-            answer = self.function(input)
+            answer = str(self.function(input))
             if answer is not None:
                 if self.operation_type == OperationType.SUBMIT:
                     message = submit_output(
@@ -96,7 +96,7 @@ def submit(
     session_list: Optional[List[str]] = None,
 ):
     """
-    Puzzle decorator used to submit a solution to advent_of_code server and provide
+    Puzzle decorator used to submit a solution to advent of code server and provide
     result. If input_file is not present then it tries to download file and cache it
     for submitting solution else it require to be provided with input_file path which
     input it can use.

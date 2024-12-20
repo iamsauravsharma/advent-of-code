@@ -4,9 +4,9 @@
 
 **Status & Info:**
 
-|                Code style                |                    License                     |            Project Version             |
-| :--------------------------------------: | :--------------------------------------------: | :------------------------------------: |
-| [![Code style][black_badge]][black_link] | [![License: MIT][license_badge]][license_link] | [![PyPI][project_badge]][project_link] |
+|                    License                     |            Project Version             |
+| :--------------------------------------------: | :------------------------------------: |
+| [![License: MIT][license_badge]][license_link] | [![PyPI][project_badge]][project_link] |
 
 ## Usage
 
@@ -44,7 +44,7 @@ After importing a library you can use either two decorator present which are sol
 For example:-
 
 ```python
-@advent_of_code_py.submit(2018,3,1,session_list="<session-name>")
+@advent_of_code_py.submit(2018, 3, 1, session_list=["<session-name>"])
 def puzzle_2018_3_1(input=None):
     # do some calculation with data and return final output
     return final_output
@@ -81,8 +81,6 @@ will run the appropriate function as well as submit as desired if the function w
 prints its output if the function was decorated by solve decorator.
 
 [advent_of_code_link]: https://adventofcode.com
-[black_badge]: https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge
-[black_link]: https://github.com/ambv/black
 [license_badge]: https://img.shields.io/github/license/iamsauravsharma/advent-of-code-py.svg?style=for-the-badge
 [license_link]: LICENSE
 [project_badge]: https://img.shields.io/pypi/v/advent-of-code-py?style=for-the-badge&color=blue&logo=python
